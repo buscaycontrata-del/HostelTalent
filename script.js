@@ -3,7 +3,6 @@ document.getElementById("candidato").addEventListener("submit", e => {
   e.preventDefault();
   alert("Formulario de candidato enviado correctamente (esto es una prueba)");
 
-  // Guardar datos de prueba en memoria para buscar después
   const form = e.target;
   window.candidatos = window.candidatos || [];
   window.candidatos.push({
@@ -23,11 +22,11 @@ document.getElementById("empresa").addEventListener("submit", e => {
   alert("Formulario de empresa enviado correctamente (esto es una prueba)");
 });
 
-// Login de empresas autorizadas (simulación)
+// Login de empresas autorizadas
 document.getElementById("loginEmpresa").addEventListener("submit", e => {
   e.preventDefault();
   const pass = e.target[1].value;
-  if(pass === "1234"){ // contraseña de prueba
+  if(pass === "1234"){
     document.getElementById("busquedaCandidatos").style.display = "block";
     alert("Acceso autorizado");
   } else {
@@ -35,7 +34,7 @@ document.getElementById("loginEmpresa").addEventListener("submit", e => {
   }
 });
 
-// Buscador de candidatos (filtrado simple)
+// Buscador de candidatos
 document.getElementById("buscarCandidatos").addEventListener("click", e => {
   e.preventDefault();
   const provincia = document.getElementById("filtroProvincia").value;
