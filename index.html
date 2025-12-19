@@ -1,96 +1,63 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <title>HostelTalent - Formularios</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
+// Formulario de candidatos
+document.getElementById("candidato").addEventListener("submit", e => {
+  e.preventDefault();
+  alert("Formulario de candidato enviado correctamente (esto es una prueba)");
 
-<h2>HostelTalent - Menú de Formularios</h2>
+  // Guardar datos de prueba en memoria para buscar después
+  const form = e.target;
+  window.candidatos = window.candidatos || [];
+  window.candidatos.push({
+    nombre: form[0].value,
+    email: form[1].value,
+    telefono: form[2].value,
+    provincia: form[3].value,
+    ayuntamiento: form[4].value,
+    distancia: form[5].value,
+    puesto: Array.from(form[6].selectedOptions).map(o => o.value)
+  });
+});
 
-<nav>
-  <a href="#candidatos">Formulario Candidatos</a> |
-  <a href="#empresas">Formulario Empresas</a>
-</nav>
+// Formulario de empresas
+document.getElementById("empresa").addEventListener("submit", e => {
+  e.preventDefault();
+  alert("Formulario de empresa enviado correctamente (esto es una prueba)");
+});
 
-<!-- Formulario de candidatos -->
-<section id="candidatos">
-  <h3>Formulario para Candidatos</h3>
-  <form id="candidato">
-    <input type="text" placeholder="Nombre y Apellidos" required>
-    <input type="email" placeholder="Email" required>
-    <input type="tel" placeholder="Teléfono" required>
+// Login de empresas autorizadas (simulación)
+document.getElementById("loginEmpresa").addEventListener("submit", e => {
+  e.preventDefault();
+  const pass = e.target[1].value;
+  if(pass === "1234"){ // contraseña de prueba
+    document.getElementById("busquedaCandidatos").style.display = "block";
+    alert("Acceso autorizado");
+  } else {
+    alert("Contraseña incorrecta");
+  }
+});
 
-    <label>Provincia</label>
-    <input list="provincias" placeholder="Buscar provincia" required>
-    <datalist id="provincias">
-      <option value="Madrid">
-      <option value="Barcelona">
-      <option value="Valencia">
-      <option value="Sevilla">
-      <option value="Zaragoza">
-    </datalist>
+// Buscador de candidatos (filtrado simple)
+document.getElementById("buscarCandidatos").addEventListener("click", e => {
+  e.preventDefault();
+  const provincia = document.getElementById("filtroProvincia").value;
+  const ayuntamiento = document.getElementById("filtroAyuntamiento").value;
+  const distancia = document.getElementById("filtroDistancia").value;
+  const puesto = document.getElementById("filtroPuesto").value;
 
-    <label>Ayuntamiento</label>
-    <input list="ayuntamientos" placeholder="Buscar ayuntamiento" required>
-    <datalist id="ayuntamientos">
-      <option value="Madrid">
-      <option value="Barcelona">
-      <option value="Valencia">
-    </datalist>
+  const resultado = (window.candidatos || []).filter(c => {
+    let match = true;
+    if(provincia) match = match && c.provincia === provincia;
+    if(ayuntamiento) match = match && c.ayuntamiento === ayuntamiento;
+    if(distancia && c.distancia !== "Sin límite") match = match && (c.distancia === distancia || c.distancia === "Sin límite");
+    if(puesto) match = match && c.puesto.includes(puesto);
+    return match;
+  });
 
-    <label>Distancia máxima</label>
-    <select required>
-      <option value="">Selecciona</option>
-      <option>Local</option>
-      <option>10 km</option>
-      <option>20 km</option>
-      <option>30 km</option>
-      <option>50 km</option>
-      <option>Sin límite</option>
-    </select>
-
-    <label>Puesto (selección múltiple)</label>
-    <select multiple required>
-      <option>Camarero/a</option>
-      <option>Cocinero/a</option>
-      <option>Ayudante de cocina</option>
-      <option>Jefe/a de sala</option>
-      <option>Recepcionista</option>
-      <option>Personal de hotel</option>
-      <option>Personal de camping</option>
-      <option>Catering</option>
-    </select>
-
-    <label>Subir CV (PDF)</label>
-    <input type="file" accept="application/pdf" required>
-
-    <button type="submit">Enviar candidatura</button>
-  </form>
-</section>
-
-<!-- Formulario de empresas -->
-<section id="empresas">
-  <h3>Formulario para Empresas</h3>
-  <form id="empresa">
-    <input type="text" placeholder="Nombre comercial" required>
-    <input type="text" placeholder="Nombre fiscal (razón social)" required>
-    <input type="text" placeholder="CIF / NIF" required>
-    <input type="email" placeholder="Email de la empresa" required>
-    <input type="tel" placeholder="Teléfono" required>
-    <input type="text" placeholder="Persona de contacto" required>
-
-    <label>Provincia del establecimiento</label>
-    <input list="provincias" placeholder="Buscar provincia" required>
-
-    <label>Ayuntamiento del establecimiento</label>
-    <input list="ayuntamientos" placeholder="Buscar ayuntamiento" required>
-
-    <button type="submit">Enviar datos de la empresa</button>
-  </form>
-</section>
-
-<script src="script.js"></script>
-</body>
-</html>
+  const ul = document.getElementById("resultadoBusqueda");
+  ul.innerHTML = "";
+  if(resultado.length === 0) ul.innerHTML = "<li>No se encontraron candidatos</li>";
+  else resultado.forEach(c => {
+    const li = document.createElement("li");
+    li.textContent = `${c.nombre} - ${c.puesto.join(", ")} - ${c.provincia}, ${c.ayuntamiento} - ${c.distancia}`;
+    ul.appendChild(li);
+  });
+});
