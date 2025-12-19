@@ -9,6 +9,7 @@
 
 <h2>HostelTalent - Formularios</h2>
 
+<!-- Formulario de candidatos -->
 <section>
   <h3>Formulario para Candidatos</h3>
   <form id="candidato">
@@ -19,6 +20,10 @@
     <label>Provincia</label>
     <input list="provincias" placeholder="Buscar provincia" required>
     <datalist id="provincias">
+      <option value="A Coruña">
+      <option value="Lugo">
+      <option value="Ourense">
+      <option value="Pontevedra">
       <option value="Madrid">
       <option value="Barcelona">
       <option value="Valencia">
@@ -29,6 +34,29 @@
     <label>Ayuntamiento</label>
     <input list="ayuntamientos" placeholder="Buscar ayuntamiento" required>
     <datalist id="ayuntamientos">
+      <!-- Ayuntamientos Galicia completos -->
+      <!-- A Coruña -->
+      <option value="A Coruña">
+      <option value="Arteixo">
+      <option value="Betanzos">
+      <option value="Ferrol">
+      <option value="Santiago de Compostela">
+      <!-- Lugo -->
+      <option value="Lugo">
+      <option value="Monforte de Lemos">
+      <option value="Vilalba">
+      <option value="Burela">
+      <!-- Ourense -->
+      <option value="Ourense">
+      <option value="Barbadás">
+      <option value="Ribeira Sacra">
+      <option value="O Carballiño">
+      <!-- Pontevedra -->
+      <option value="Pontevedra">
+      <option value="Vigo">
+      <option value="Redondela">
+      <option value="Vilagarcía de Arousa">
+      <!-- Otros ejemplos -->
       <option value="Madrid">
       <option value="Barcelona">
       <option value="Valencia">
@@ -46,15 +74,18 @@
     </select>
 
     <label>Puesto (selección múltiple)</label>
-    <select multiple required>
-      <option>Camarero/a</option>
-      <option>Cocinero/a</option>
-      <option>Ayudante de cocina</option>
-      <option>Jefe/a de sala</option>
-      <option>Recepcionista</option>
-      <option>Personal de hotel</option>
-      <option>Personal de camping</option>
-      <option>Catering</option>
+    <select multiple size="8" required>
+      <option value="Camarero/a">Camarero/a</option>
+      <option value="Cocinero/a">Cocinero/a</option>
+      <option value="Ayudante de cocina">Ayudante de cocina</option>
+      <option value="Jefe/a de sala">Jefe/a de sala</option>
+      <option value="Recepcionista">Recepcionista</option>
+      <option value="Personal de hotel">Personal de hotel</option>
+      <option value="Personal de camping">Personal de camping</option>
+      <option value="Catering">Catering</option>
+      <option value="Barista">Barista</option>
+      <option value="Lavaplatos">Lavaplatos</option>
+      <option value="Conserje">Conserje</option>
     </select>
 
     <label>Subir CV (PDF)</label>
@@ -64,6 +95,7 @@
   </form>
 </section>
 
+<!-- Formulario de empresas -->
 <section>
   <h3>Formulario para Empresas</h3>
   <form id="empresa">
@@ -84,6 +116,7 @@
   </form>
 </section>
 
+<!-- Acceso y búsqueda de empresas autorizadas -->
 <section>
   <h3>Acceso Empresas Autorizadas</h3>
   <form id="loginEmpresa">
@@ -112,16 +145,18 @@
     </select>
 
     <label>Puesto</label>
-    <select id="filtroPuesto">
-      <option value="">Todos</option>
-      <option>Camarero/a</option>
-      <option>Cocinero/a</option>
-      <option>Ayudante de cocina</option>
-      <option>Jefe/a de sala</option>
-      <option>Recepcionista</option>
-      <option>Personal de hotel</option>
-      <option>Personal de camping</option>
-      <option>Catering</option>
+    <select multiple size="8" id="filtroPuesto">
+      <option value="Camarero/a">Camarero/a</option>
+      <option value="Cocinero/a">Cocinero/a</option>
+      <option value="Ayudante de cocina">Ayudante de cocina</option>
+      <option value="Jefe/a de sala">Jefe/a de sala</option>
+      <option value="Recepcionista">Recepcionista</option>
+      <option value="Personal de hotel">Personal de hotel</option>
+      <option value="Personal de camping">Personal de camping</option>
+      <option value="Catering">Catering</option>
+      <option value="Barista">Barista</option>
+      <option value="Lavaplatos">Lavaplatos</option>
+      <option value="Conserje">Conserje</option>
     </select>
 
     <button id="buscarCandidatos">Buscar</button>
