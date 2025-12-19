@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Formulario Candidatos</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h2>Formulario para Candidatos</h2>
+
+<form id="candidato">
+  <input type="text" placeholder="Nombre y Apellidos" required>
+  <input type="email" placeholder="Email" required>
+  <input type="tel" placeholder="Teléfono" required>
+
+  <label>Provincia</label>
+  <input list="provincias" placeholder="Buscar provincia" required>
+  <datalist id="provincias">
+    <option value="Madrid">
+    <option value="Barcelona">
+    <option value="Valencia">
+    <option value="Sevilla">
+    <option value="Zaragoza">
+  </datalist>
+
+  <label>Ayuntamiento</label>
+  <input list="ayuntamientos" placeholder="Buscar ayuntamiento" required>
+  <datalist id="ayuntamientos">
+    <option value="Madrid">
+    <option value="Barcelona">
+    <option value="Valencia">
+  </datalist>
+
+  <label>Distancia máxima</label>
+  <select required>
+    <option value="">Selecciona</option>
+    <option>Local</option>
+    <option>10 km</option>
+    <option>20 km</option>
+    <option>30 km</option>
+    <option>50 km</option>
+    <option>Sin límite</option>
+  </select>
+
+  <label>Puesto (selección múltiple)</label>
+  <select multiple required>
+    <option>Camarero/a</option>
+    <option>Cocinero/a</option>
+    <option>Ayudante de cocina</option>
+    <option>Jefe/a de sala</option>
+    <option>Recepcionista</option>
+    <option>Personal de hotel</option>
+    <option>Personal de camping</option>
+    <option>Catering</option>
+  </select>
+
+  <label>Subir CV (PDF)</label>
+  <input type="file" accept="application/pdf" required>
+
+  <button type="submit">Enviar candidatura</button>
+</form>
+
+<script src="script.js"></script>
+</body>
+</html>
