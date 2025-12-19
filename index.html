@@ -2,64 +2,94 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Formulario Candidatos</title>
+  <title>HostelTalent - Formularios</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<h2>Formulario para Candidatos</h2>
+<h2>HostelTalent - Menú de Formularios</h2>
 
-<form id="candidato">
-  <input type="text" placeholder="Nombre y Apellidos" required>
-  <input type="email" placeholder="Email" required>
-  <input type="tel" placeholder="Teléfono" required>
+<nav>
+  <a href="#candidatos">Formulario Candidatos</a> |
+  <a href="#empresas">Formulario Empresas</a>
+</nav>
 
-  <label>Provincia</label>
-  <input list="provincias" placeholder="Buscar provincia" required>
-  <datalist id="provincias">
-    <option value="Madrid">
-    <option value="Barcelona">
-    <option value="Valencia">
-    <option value="Sevilla">
-    <option value="Zaragoza">
-  </datalist>
+<!-- Formulario de candidatos -->
+<section id="candidatos">
+  <h3>Formulario para Candidatos</h3>
+  <form id="candidato">
+    <input type="text" placeholder="Nombre y Apellidos" required>
+    <input type="email" placeholder="Email" required>
+    <input type="tel" placeholder="Teléfono" required>
 
-  <label>Ayuntamiento</label>
-  <input list="ayuntamientos" placeholder="Buscar ayuntamiento" required>
-  <datalist id="ayuntamientos">
-    <option value="Madrid">
-    <option value="Barcelona">
-    <option value="Valencia">
-  </datalist>
+    <label>Provincia</label>
+    <input list="provincias" placeholder="Buscar provincia" required>
+    <datalist id="provincias">
+      <option value="Madrid">
+      <option value="Barcelona">
+      <option value="Valencia">
+      <option value="Sevilla">
+      <option value="Zaragoza">
+    </datalist>
 
-  <label>Distancia máxima</label>
-  <select required>
-    <option value="">Selecciona</option>
-    <option>Local</option>
-    <option>10 km</option>
-    <option>20 km</option>
-    <option>30 km</option>
-    <option>50 km</option>
-    <option>Sin límite</option>
-  </select>
+    <label>Ayuntamiento</label>
+    <input list="ayuntamientos" placeholder="Buscar ayuntamiento" required>
+    <datalist id="ayuntamientos">
+      <option value="Madrid">
+      <option value="Barcelona">
+      <option value="Valencia">
+    </datalist>
 
-  <label>Puesto (selección múltiple)</label>
-  <select multiple required>
-    <option>Camarero/a</option>
-    <option>Cocinero/a</option>
-    <option>Ayudante de cocina</option>
-    <option>Jefe/a de sala</option>
-    <option>Recepcionista</option>
-    <option>Personal de hotel</option>
-    <option>Personal de camping</option>
-    <option>Catering</option>
-  </select>
+    <label>Distancia máxima</label>
+    <select required>
+      <option value="">Selecciona</option>
+      <option>Local</option>
+      <option>10 km</option>
+      <option>20 km</option>
+      <option>30 km</option>
+      <option>50 km</option>
+      <option>Sin límite</option>
+    </select>
 
-  <label>Subir CV (PDF)</label>
-  <input type="file" accept="application/pdf" required>
+    <label>Puesto (selección múltiple)</label>
+    <select multiple required>
+      <option>Camarero/a</option>
+      <option>Cocinero/a</option>
+      <option>Ayudante de cocina</option>
+      <option>Jefe/a de sala</option>
+      <option>Recepcionista</option>
+      <option>Personal de hotel</option>
+      <option>Personal de camping</option>
+      <option>Catering</option>
+    </select>
 
-  <button type="submit">Enviar candidatura</button>
-</form>
+    <label>Subir CV (PDF)</label>
+    <input type="file" accept="application/pdf" required>
+
+    <button type="submit">Enviar candidatura</button>
+  </form>
+</section>
+
+<!-- Formulario de empresas -->
+<section id="empresas">
+  <h3>Formulario para Empresas</h3>
+  <form id="empresa">
+    <input type="text" placeholder="Nombre comercial" required>
+    <input type="text" placeholder="Nombre fiscal (razón social)" required>
+    <input type="text" placeholder="CIF / NIF" required>
+    <input type="email" placeholder="Email de la empresa" required>
+    <input type="tel" placeholder="Teléfono" required>
+    <input type="text" placeholder="Persona de contacto" required>
+
+    <label>Provincia del establecimiento</label>
+    <input list="provincias" placeholder="Buscar provincia" required>
+
+    <label>Ayuntamiento del establecimiento</label>
+    <input list="ayuntamientos" placeholder="Buscar ayuntamiento" required>
+
+    <button type="submit">Enviar datos de la empresa</button>
+  </form>
+</section>
 
 <script src="script.js"></script>
 </body>
