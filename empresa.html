@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Formulario Empresas</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h2>Formulario para Empresas</h2>
+
+<form id="empresa">
+  <input type="text" placeholder="Nombre comercial" required>
+  <input type="text" placeholder="Nombre fiscal (razón social)" required>
+  <input type="text" placeholder="CIF / NIF" required>
+  <input type="email" placeholder="Email de la empresa" required>
+  <input type="tel" placeholder="Teléfono" required>
+  <input type="text" placeholder="Persona de contacto" required>
+
+  <label>Provincia del establecimiento</label>
+  <input list="provincias" placeholder="Buscar provincia" required>
+  <datalist id="provincias">
+    <option value="Madrid">
+    <option value="Barcelona">
+    <option value="Valencia">
+    <option value="Sevilla">
+    <option value="Zaragoza">
+  </datalist>
+
+  <label>Ayuntamiento del establecimiento</label>
+  <input list="ayuntamientos" placeholder="Buscar ayuntamiento" required>
+  <datalist id="ayuntamientos">
+    <option value="Madrid">
+    <option value="Barcelona">
+    <option value="Valencia">
+  </datalist>
+
+  <button type="submit">Enviar datos de la empresa</button>
+</form>
+
+<script src="script.js"></script>
+<a href="index.html">Volver al formulario de candidatos</a>
+
+</body>
+</html>
