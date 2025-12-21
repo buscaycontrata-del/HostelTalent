@@ -178,9 +178,6 @@
       box-shadow: 0 6px 12px rgba(0,0,0,0.12);
     }
 
-    /* ¡NO CAMBIO LOS COLORES INDIVIDUALES! */
-    /* Los tres botones usan el mismo color de fondo */
-
     /* Puestos */
     #puestosContainer {
       border: 1px solid #e9ecef;
@@ -453,22 +450,59 @@
 
 <script src="script.js"></script>
 <script>
-  // Mostrar/ocultar secciones
+  // Función para mostrar una sección y desplazarse a ella
+  function mostrarSeccion(id) {
+    // Ocultar todas las secciones
+    document.getElementById("seccionCandidatos").style.display = "none";
+    document.getElementById("seccionEmpresas").style.display = "none";
+    document.getElementById("seccionEntrar").style.display = "none";
+    
+    // Mostrar la sección seleccionada
+    document.getElementById(id).style.display = "block";
+    
+    // Desplazarse suavemente a la sección
+    document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+  }
+
+  // Asignar eventos a los botones
   document.getElementById("btnCandidatos").onclick = () => {
-    document.getElementById("seccionCandidatos").style.display = "block";
-    document.getElementById("seccionEmpresas").style.display = "none";
-    document.getElementById("seccionEntrar").style.display = "none";
+    mostrarSeccion("seccionCandidatos");
   };
+  
   document.getElementById("btnEmpresas").onclick = () => {
-    document.getElementById("seccionCandidatos").style.display = "none";
-    document.getElementById("seccionEmpresas").style.display = "block";
-    document.getElementById("seccionEntrar").style.display = "none";
+    mostrarSeccion("seccionEmpresas");
   };
+  
   document.getElementById("btnEntrar").onclick = () => {
-    document.getElementById("seccionCandidatos").style.display = "none";
-    document.getElementById("seccionEmpresas").style.display = "none";
-    document.getElementById("seccionEntrar").style.display = "block";
+    mostrarSeccion("seccionEntrar");
   };
+
+  // Después de enviar candidato, volver a inicio
+  document.getElementById("formCandidato").addEventListener("submit", function(e) {
+    e.preventDefault();
+    // Aquí va tu lógica de registro (ya está en script.js)
+    // Llamamos al submit real
+    const event = new Event('submit', { cancelable: true });
+    this.dispatchEvent(event);
+    
+    // Después de un breve delay, volver a inicio
+    setTimeout(() => {
+      document.getElementById("seccionCandidatos").style.display = "none";
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 500);
+  });
+
+  // Después de enviar empresa, volver a inicio
+  document.getElementById("formEmpresa").addEventListener("submit", function(e) {
+    e.preventDefault();
+    const event = new Event('submit', { cancelable: true });
+    this.dispatchEvent(event);
+    
+    setTimeout(() => {
+      document.getElementById("seccionEmpresas").style.display = "none";
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 500);
+  });
 
   // Buscador dinámico en el formulario de candidatos
   document.getElementById("puestosBuscador").addEventListener("input", function() {
