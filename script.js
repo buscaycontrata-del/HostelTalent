@@ -50,6 +50,7 @@ document.getElementById("buscarCandidatos")?.addEventListener("click", e => {
   const ayuntamiento = document.getElementById("filtroAyuntamiento")?.value;
   const distancia = document.getElementById("filtroDistancia")?.value;
 
+  // Usamos directamente los candidatos guardados con checkboxes
   const puestosFiltro = Array.from(
     document.querySelectorAll("#filtroPuestos option:checked")
   ).map(o => o.value);
@@ -72,6 +73,7 @@ document.getElementById("buscarCandidatos")?.addEventListener("click", e => {
       match = match && (c.distancia === distancia || c.distancia === "Sin límite");
     }
 
+    // Cambio mínimo: comparamos los puestos seleccionados del candidato con los filtros, si hay filtros
     if (puestosFiltro.length > 0) {
       match = match && puestosFiltro.some(p => c.puestos.includes(p));
     }
