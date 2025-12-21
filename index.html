@@ -387,6 +387,13 @@
       <option value="Sumiller">Sumiller</option>
     </select>
     <button id="buscarCandidatos">Buscar</button>
+    <button type="button" class="btn-volver" style="margin-top:12px;" onclick="
+      document.getElementById('filtroProvincia').value = '';
+      document.getElementById('filtroAyuntamiento').value = '';
+      document.getElementById('filtroDistancia').value = '';
+      document.getElementById('filtroPuestos').querySelectorAll('option').forEach(opt => opt.selected = false);
+      document.getElementById('resultadoBusqueda').innerHTML = '';
+    ">Nueva búsqueda</button>
     <ul id="resultadoBusqueda" style="margin-top:10px;"></ul>
   </div>
 </section>
