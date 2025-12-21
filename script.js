@@ -1,9 +1,10 @@
 document.getElementById("formCandidato").addEventListener("submit", e => {
   e.preventDefault();
 
+  // Recoger todos los checkboxes marcados
   const puestosSeleccionados = Array.from(
-    document.getElementById("puestos").selectedOptions
-  ).map(o => o.value);
+    document.querySelectorAll("#puestosContainer input[type='checkbox']:checked")
+  ).map(cb => cb.value);
 
   window.candidatos = window.candidatos || [];
 
