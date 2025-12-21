@@ -133,7 +133,7 @@ document.getElementById("loginEmpresa").addEventListener("submit", function(e) {
 });
 
 // ===============
-// BÚSQUEDA DE CANDIDATOS (con cálculo real de distancia)
+// BÚSQUEDA DE CANDIDATOS (con cálculo real de distancia y provincia normalizada)
 // ===============
 document.getElementById("buscarCandidatos").addEventListener("click", function(e) {
   e.preventDefault();
@@ -156,8 +156,10 @@ document.getElementById("buscarCandidatos").addEventListener("click", function(e
   // "Sin límite" o vacío → kmMax = Infinity (ya está)
 
   const resultados = candidatos.filter(c => {
-    // Filtro por provincia
-    if (provinciaFiltro && c.provincia !== provinciaFiltro) return false;
+    // 🔸 Comparación de provincia en minúsculas (para evitar errores de mayúsculas)
+    if (provinciaFiltro && c.provincia.toLowerCase() !== provinciaFiltro.toLowerCase()) {
+      return false;
+    }
 
     // Filtro por puesto
     if (puestosFiltro.length > 0) {
