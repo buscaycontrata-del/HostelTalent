@@ -147,7 +147,8 @@ document.getElementById("buscarCandidatos").addEventListener("click", function(e
   } else {
     resultados.forEach(c => {
       const li = document.createElement("li");
-      li.textContent = `${c.nombre} | ${c.puestos.join(", ")} | ${c.provincia}, ${c.ayuntamiento} | ${c.distancia}`;
+      // 👇 Aquí se añade el CV al final
+      li.textContent = `${c.nombre} | ${c.puestos.join(", ")} | ${c.provincia}, ${c.ayuntamiento} | ${c.distancia} | CV: ${c.cv}`;
       ul.appendChild(li);
     });
   }
