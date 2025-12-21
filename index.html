@@ -33,20 +33,20 @@
       <option>Sin límite</option>
     </select>
 
-    <label>Puestos (selección múltiple)</label>
-    <select id="puestos" multiple size="8" required>
-      <option value="Camarero/a">Camarero/a</option>
-      <option value="Cocinero/a">Cocinero/a</option>
-      <option value="Ayudante de cocina">Ayudante de cocina</option>
-      <option value="Jefe/a de sala">Jefe/a de sala</option>
-      <option value="Recepcionista">Recepcionista</option>
-      <option value="Personal de hotel">Personal de hotel</option>
-      <option value="Personal de camping">Personal de camping</option>
-      <option value="Catering">Catering</option>
-      <option value="Barista">Barista</option>
-      <option value="Lavaplatos">Lavaplatos</option>
-      <option value="Conserje">Conserje</option>
-    </select>
+    <label>Puestos (marca los que apliquen)</label>
+    <div id="puestosContainer">
+      <label><input type="checkbox" value="Camarero/a"> Camarero/a</label><br>
+      <label><input type="checkbox" value="Cocinero/a"> Cocinero/a</label><br>
+      <label><input type="checkbox" value="Ayudante de cocina"> Ayudante de cocina</label><br>
+      <label><input type="checkbox" value="Jefe/a de sala"> Jefe/a de sala</label><br>
+      <label><input type="checkbox" value="Recepcionista"> Recepcionista</label><br>
+      <label><input type="checkbox" value="Personal de hotel"> Personal de hotel</label><br>
+      <label><input type="checkbox" value="Personal de camping"> Personal de camping</label><br>
+      <label><input type="checkbox" value="Catering"> Catering</label><br>
+      <label><input type="checkbox" value="Barista"> Barista</label><br>
+      <label><input type="checkbox" value="Lavaplatos"> Lavaplatos</label><br>
+      <label><input type="checkbox" value="Conserje"> Conserje</label>
+    </div>
 
     <label>Subir CV (PDF)</label>
     <input type="file" id="cv" accept="application/pdf" required>
