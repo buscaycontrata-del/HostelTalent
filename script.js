@@ -93,16 +93,20 @@ document.getElementById("loginEmpresa").addEventListener("submit", function(e) {
   const nombreEmpresa = document.getElementById("nombreEmpresaLogin").value.trim();
   const password = document.getElementById("loginPassword").value;
 
-  // En demo: aceptamos cualquier empresa registrada + contraseña "1234"
+  if (password !== "1234") {
+    alert("❌ Contraseña incorrecta.");
+    return;
+  }
+
   const empresaExiste = empresas.some(emp => 
-    emp.nombreComercial.toLowerCase() === nombreEmpresa.toLowerCase()
+    emp.nombreComercial.trim().toLowerCase() === nombreEmpresa.toLowerCase()
   );
 
-  if (password === "1234" && empresaExiste) {
+  if (empresaExiste) {
     document.getElementById("busquedaCandidatos").style.display = "block";
     alert("🔓 Acceso concedido.");
   } else {
-    alert("❌ Empresa no registrada o contraseña incorrecta.");
+    alert("❌ Empresa no registrada. Verifica el nombre comercial exacto.");
   }
 });
 
