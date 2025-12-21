@@ -23,13 +23,11 @@ document.getElementById("formCandidato").addEventListener("submit", e => {
   e.target.reset();
 });
 
-
 // Formulario de empresas
 document.getElementById("formEmpresa")?.addEventListener("submit", e => {
   e.preventDefault();
   alert("Formulario de empresa enviado (demo)");
 });
-
 
 // Login de empresas autorizadas
 document.getElementById("loginEmpresa")?.addEventListener("submit", e => {
@@ -42,7 +40,6 @@ document.getElementById("loginEmpresa")?.addEventListener("submit", e => {
     alert("Contraseña incorrecta");
   }
 });
-
 
 // Buscador de candidatos
 document.getElementById("buscarCandidatos")?.addEventListener("click", e => {
