@@ -115,7 +115,7 @@
       border-radius: 12px;
     }
 
-    /* Botones de acción (enviar, volver, nueva búsqueda) - más pequeños */
+    /* Botones de acción - tamaño reducido */
     form button[type="submit"],
     .btn-volver,
     #buscarCandidatos,
@@ -126,9 +126,9 @@
       font-weight: 600;
       cursor: pointer;
       border-radius: 50px;
-      padding: 10px 20px; /* ← más pequeño */
+      padding: 10px 20px;
       box-shadow: 0 4px 8px rgba(0,0,0,0.08);
-      font-size: 14px; /* ← más pequeño */
+      font-size: 14px;
       transition: all 0.3s;
     }
 
@@ -416,7 +416,8 @@
   <option value="Pontevedra">
 </datalist>
 
-<script src="script.js"></script>
+<!-- ⚠️ Versión con ?v=2 para evitar caché -->
+<script src="script.js?v=2"></script>
 <script>
   function volverPrincipal() {
     document.getElementById("paginaPrincipal").style.display = "block";
