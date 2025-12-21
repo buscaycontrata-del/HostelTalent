@@ -50,7 +50,7 @@
     </div>
 
     <label>Subir CV (PDF)</label>
-    <input type="file" id="cv" accept="application/pdf" required>
+    <input type="file" id="cv" accept="application/pdf">
 
     <button type="submit">Enviar candidatura</button>
   </form>
@@ -60,18 +60,18 @@
 <section>
   <h3>Formulario para Empresas</h3>
   <form id="formEmpresa">
-    <input type="text" placeholder="Nombre comercial" required>
-    <input type="text" placeholder="Nombre fiscal (razón social)" required>
-    <input type="text" placeholder="CIF / NIF" required>
-    <input type="email" placeholder="Email de la empresa" required>
-    <input type="tel" placeholder="Teléfono" required>
-    <input type="text" placeholder="Persona de contacto" required>
+    <input type="text" id="nombreComercial" placeholder="Nombre comercial" required>
+    <input type="text" id="nombreFiscal" placeholder="Nombre fiscal (razón social)" required>
+    <input type="text" id="cif" placeholder="CIF / NIF" required>
+    <input type="email" id="emailEmpresa" placeholder="Email de la empresa" required>
+    <input type="tel" id="telefonoEmpresa" placeholder="Teléfono" required>
+    <input type="text" id="personaContacto" placeholder="Persona de contacto" required>
 
     <label>Provincia del establecimiento</label>
-    <input list="provincias" placeholder="Buscar provincia" required>
+    <input list="provincias" id="provinciaEmpresa" placeholder="Buscar provincia" required>
 
     <label>Ayuntamiento del establecimiento</label>
-    <input list="ayuntamientos" placeholder="Buscar ayuntamiento" required>
+    <input list="ayuntamientos" id="ayuntamientoEmpresa" placeholder="Buscar ayuntamiento" required>
 
     <button type="submit">Enviar datos de la empresa</button>
   </form>
@@ -81,7 +81,7 @@
 <section>
   <h3>Acceso Empresas Autorizadas</h3>
   <form id="loginEmpresa">
-    <input type="text" placeholder="Nombre de la empresa" required>
+    <input type="text" id="nombreEmpresaLogin" placeholder="Nombre de la empresa" required>
     <input type="password" id="loginPassword" placeholder="Contraseña" required>
     <button type="submit">Entrar</button>
   </form>
@@ -112,16 +112,16 @@
     <label>Puesto</label>
     <select multiple size="8" id="filtroPuestos">
       <option value="Camarero/a">Camarero/a</option>
-      <option value="Cocinero/a">Cocinero/a</option>
-      <option value="Ayudante de cocina">Ayudante de cocina</option>
-      <option value="Jefe/a de sala">Jefe/a de sala</option>
-      <option value="Recepcionista">Recepcionista</option>
-      <option value="Personal de hotel">Personal de hotel</option>
-      <option value="Personal de camping">Personal de camping</option>
-      <option value="Catering">Catering</option>
-      <option value="Barista">Barista</option>
-      <option value="Lavaplatos">Lavaplatos</option>
-      <option value="Conserje">Conserje</option>
+      <option value="Cocinero/a"> Cocinero/a</option>
+      <option value="Ayudante de cocina"> Ayudante de cocina</option>
+      <option value="Jefe/a de sala"> Jefe/a de sala</option>
+      <option value="Recepcionista"> Recepcionista</option>
+      <option value="Personal de hotel"> Personal de hotel</option>
+      <option value="Personal de camping"> Personal de camping</option>
+      <option value="Catering"> Catering</option>
+      <option value="Barista"> Barista</option>
+      <option value="Lavaplatos"> Lavaplatos</option>
+      <option value="Conserje"> Conserje</option>
     </select>
 
     <button id="buscarCandidatos">Buscar</button>
