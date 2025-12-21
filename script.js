@@ -11,7 +11,7 @@ function cargarDeStorage(clave) {
 }
 
 // ===============
-// TABLA DE DISTANCIAS ENTRE AYUNTAMIENTOS
+// TABLA DE DISTANCIAS
 // ===============
 const distancias = {
   "Vigo": { "Vigo": 0, "Cangas": 29, "Moaña": 19, "Bueu": 29, "Nigrán": 15, "Oia": 50, "Redondela": 14, "Pontevedra": 28, "Soutomaior": 20 },
@@ -31,12 +31,12 @@ function getDistancia(ay1, ay2) {
 }
 
 // ===============
-// CARGA INICIAL: SOLO LA EMPRESA, SIN CANDIDATOS
+// CARGA INICIAL
 // ===============
-let candidatos = []; // ← ¡VACÍO! Se eliminan todos los candidatos
+let candidatos = cargarDeStorage("candidatos");
 let empresas = cargarDeStorage("empresas");
 
-// Si no hay empresas, creamos la de prueba
+// Si no hay empresas, crea la de prueba
 if (empresas.length === 0) {
   empresas = [{
     nombreComercial: "HostelTalent",
@@ -144,7 +144,7 @@ document.getElementById("loginEmpresa").addEventListener("submit", function(e) {
 });
 
 // ===============
-// BÚSQUEDA DE CANDIDATOS (LÓGICA CORRECTA)
+// BÚSQUEDA DE CANDIDATOS (CORREGIDA Y COMPLETA)
 // ===============
 document.getElementById("buscarCandidatos").addEventListener("click", function(e) {
   e.preventDefault();
@@ -170,28 +170,28 @@ document.getElementById("buscarCandidatos").addEventListener("click", function(e
   };
 
   const resultados = candidatos.filter(c => {
-    // Provincia
+    // 1. Provincia
     if (provinciaFiltro && c.provincia !== provinciaFiltro) return false;
 
-    // Puesto
+    // 2. Puesto: si NO se seleccionó ninguno, se ignora
     if (puestosFiltro.length > 0 && !puestosFiltro.some(p => c.puestos.includes(p))) return false;
 
-    // Sin ayuntamiento → pasa
+    // 3. Si no hay ayuntamiento, pasar
     if (!ayuntamientoFiltro) return true;
 
-    // Distancia real
+    // 4. Distancia real
     const d = getDistancia(ayuntamientoFiltro, c.ayuntamiento);
     if (d === Infinity) return false;
 
-    // Si candidato puso "Sin límite", pasa
+    // 5. Si candidato puso "Sin límite", pasa
     if (c.distancia === "Sin límite") return true;
 
-    // Si búsqueda es "Local"
+    // 6. Si búsqueda es "Local"
     if (distanciaFiltro === "Local") {
       return d === 0 || d <= parseKm(c.distancia);
     }
 
-    // Otras distancias
+    // 7. Para otras distancias
     const kmCandidato = parseKm(c.distancia);
     const kmBusqueda = parseKm(distanciaFiltro);
     return d <= kmCandidato && d <= kmBusqueda;
