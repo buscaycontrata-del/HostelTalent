@@ -50,7 +50,11 @@ document.getElementById("buscarCandidatos")?.addEventListener("click", e => {
   const ayuntamiento = document.getElementById("filtroAyuntamiento")?.value;
   const distancia = document.getElementById("filtroDistancia")?.value;
 
-  // Cambio mínimo: tomamos todos los candidatos guardados en memoria
+  // Cambio mínimo: filtramos los candidatos usando sus puestos reales guardados en memoria
+  const puestosFiltro = Array.from(
+    document.querySelectorAll("#filtroPuestos option:checked")
+  ).map(o => o.value);
+
   const resultado = (window.candidatos || []).filter(c => {
     let match = true;
 
@@ -69,11 +73,7 @@ document.getElementById("buscarCandidatos")?.addEventListener("click", e => {
       match = match && (c.distancia === distancia || c.distancia === "Sin límite");
     }
 
-    // PUESTOS: comparamos los puestos guardados, si hay opciones marcadas en el filtro
-    const puestosFiltro = Array.from(
-      document.querySelectorAll("#filtroPuestos option:checked")
-    ).map(o => o.value);
-
+    // Filtrado de puestos
     if (puestosFiltro.length > 0) {
       match = match && puestosFiltro.some(p => c.puestos.includes(p));
     }
