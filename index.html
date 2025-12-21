@@ -12,58 +12,19 @@
 <!-- Formulario de candidatos -->
 <section>
   <h3>Formulario para Candidatos</h3>
-  <form id="candidato">
-    <input type="text" placeholder="Nombre y Apellidos" required>
-    <input type="email" placeholder="Email" required>
-    <input type="tel" placeholder="Teléfono" required>
+  <form id="formCandidato">
+    <input type="text" id="nombre" name="nombre" placeholder="Nombre y Apellidos" required>
+    <input type="email" id="email" name="email" placeholder="Email" required>
+    <input type="tel" id="telefono" name="telefono" placeholder="Teléfono" required>
 
     <label>Provincia</label>
-    <input list="provincias" placeholder="Buscar provincia" required>
-    <datalist id="provincias">
-      <option value="A Coruña">
-      <option value="Lugo">
-      <option value="Ourense">
-      <option value="Pontevedra">
-      <option value="Madrid">
-      <option value="Barcelona">
-      <option value="Valencia">
-      <option value="Sevilla">
-      <option value="Zaragoza">
-    </datalist>
+    <input list="provincias" id="provincia" name="provincia" placeholder="Buscar provincia" required>
 
     <label>Ayuntamiento</label>
-    <input list="ayuntamientos" placeholder="Buscar ayuntamiento" required>
-    <datalist id="ayuntamientos">
-      <!-- Ayuntamientos Galicia completos -->
-      <!-- A Coruña -->
-      <option value="A Coruña">
-      <option value="Arteixo">
-      <option value="Betanzos">
-      <option value="Ferrol">
-      <option value="Santiago de Compostela">
-      <!-- Lugo -->
-      <option value="Lugo">
-      <option value="Monforte de Lemos">
-      <option value="Vilalba">
-      <option value="Burela">
-      <!-- Ourense -->
-      <option value="Ourense">
-      <option value="Barbadás">
-      <option value="Ribeira Sacra">
-      <option value="O Carballiño">
-      <!-- Pontevedra -->
-      <option value="Pontevedra">
-      <option value="Vigo">
-      <option value="Redondela">
-      <option value="Vilagarcía de Arousa">
-      <!-- Otros ejemplos -->
-      <option value="Madrid">
-      <option value="Barcelona">
-      <option value="Valencia">
-    </datalist>
+    <input list="ayuntamientos" id="ayuntamiento" name="ayuntamiento" placeholder="Buscar ayuntamiento" required>
 
     <label>Distancia máxima</label>
-    <select required>
+    <select id="distancia" name="distancia" required>
       <option value="">Selecciona</option>
       <option>Local</option>
       <option>10 km</option>
@@ -73,8 +34,8 @@
       <option>Sin límite</option>
     </select>
 
-    <label>Puesto (selección múltiple)</label>
-    <select multiple size="8" required>
+    <label>Puestos (selección múltiple)</label>
+    <select id="puestos" name="puestos" multiple size="8" required>
       <option value="Camarero/a">Camarero/a</option>
       <option value="Cocinero/a">Cocinero/a</option>
       <option value="Ayudante de cocina">Ayudante de cocina</option>
@@ -89,7 +50,7 @@
     </select>
 
     <label>Subir CV (PDF)</label>
-    <input type="file" accept="application/pdf" required>
+    <input type="file" id="cv" name="cv" accept="application/pdf" required>
 
     <button type="submit">Enviar candidatura</button>
   </form>
@@ -98,42 +59,45 @@
 <!-- Formulario de empresas -->
 <section>
   <h3>Formulario para Empresas</h3>
-  <form id="empresa">
-    <input type="text" placeholder="Nombre comercial" required>
-    <input type="text" placeholder="Nombre fiscal (razón social)" required>
-    <input type="text" placeholder="CIF / NIF" required>
-    <input type="email" placeholder="Email de la empresa" required>
-    <input type="tel" placeholder="Teléfono" required>
-    <input type="text" placeholder="Persona de contacto" required>
+  <form id="formEmpresa">
+    <input type="text" name="nombreComercial" placeholder="Nombre comercial" required>
+    <input type="text" name="razonSocial" placeholder="Nombre fiscal (razón social)" required>
+    <input type="text" name="cif" placeholder="CIF / NIF" required>
+    <input type="email" name="emailEmpresa" placeholder="Email de la empresa" required>
+    <input type="tel" name="telefonoEmpresa" placeholder="Teléfono" required>
+    <input type="text" name="contacto" placeholder="Persona de contacto" required>
 
-    <label>Provincia del establecimiento</label>
-    <input list="provincias" placeholder="Buscar provincia" required>
+    <label>Provincia</label>
+    <input list="provincias" name="provinciaEmpresa" placeholder="Buscar provincia" required>
 
-    <label>Ayuntamiento del establecimiento</label>
-    <input list="ayuntamientos" placeholder="Buscar ayuntamiento" required>
+    <label>Ayuntamiento</label>
+    <input list="ayuntamientos" name="ayuntamientoEmpresa" placeholder="Buscar ayuntamiento" required>
 
     <button type="submit">Enviar datos de la empresa</button>
   </form>
 </section>
 
-<!-- Acceso y búsqueda de empresas autorizadas -->
+<!-- Login empresas -->
 <section>
   <h3>Acceso Empresas Autorizadas</h3>
   <form id="loginEmpresa">
-    <input type="text" placeholder="Nombre de la empresa" required>
-    <input type="password" placeholder="Contraseña" required>
+    <input type="text" id="loginNombre" placeholder="Nombre de la empresa" required>
+    <input type="password" id="loginPassword" placeholder="Contraseña" required>
     <button type="submit">Entrar</button>
   </form>
 
   <div id="busquedaCandidatos" style="display:none; margin-top:20px;">
     <h4>Buscar Candidatos</h4>
+
+    <input type="text" id="busquedaTexto" placeholder="Buscar por nombre, puesto o localidad">
+
     <label>Provincia</label>
-    <input list="provincias" id="filtroProvincia" placeholder="Provincia">
+    <input list="provincias" id="filtroProvincia">
 
     <label>Ayuntamiento</label>
-    <input list="ayuntamientos" id="filtroAyuntamiento" placeholder="Ayuntamiento">
+    <input list="ayuntamientos" id="filtroAyuntamiento">
 
-    <label>Radio de distancia</label>
+    <label>Distancia</label>
     <select id="filtroDistancia">
       <option value="">Cualquiera</option>
       <option>Local</option>
@@ -144,8 +108,8 @@
       <option>Sin límite</option>
     </select>
 
-    <label>Puesto</label>
-    <select multiple size="8" id="filtroPuesto">
+    <label>Puestos</label>
+    <select id="filtroPuestos" multiple size="8">
       <option value="Camarero/a">Camarero/a</option>
       <option value="Cocinero/a">Cocinero/a</option>
       <option value="Ayudante de cocina">Ayudante de cocina</option>
@@ -160,9 +124,32 @@
     </select>
 
     <button id="buscarCandidatos">Buscar</button>
-    <ul id="resultadoBusqueda" style="margin-top:10px;"></ul>
+    <ul id="resultadoBusqueda"></ul>
   </div>
 </section>
+
+<!-- DATALISTS -->
+<datalist id="provincias">
+  <option value="A Coruña">
+  <option value="Lugo">
+  <option value="Ourense">
+  <option value="Pontevedra">
+  <option value="Madrid">
+  <option value="Barcelona">
+  <option value="Valencia">
+</datalist>
+
+<datalist id="ayuntamientos">
+  <option value="A Coruña">
+  <option value="Santiago de Compostela">
+  <option value="Ferrol">
+  <option value="Lugo">
+  <option value="Ourense">
+  <option value="Vigo">
+  <option value="Pontevedra">
+  <option value="Madrid">
+  <option value="Barcelona">
+</datalist>
 
 <script src="script.js"></script>
 </body>
