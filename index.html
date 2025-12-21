@@ -9,6 +9,7 @@
 
 <h2>HostelTalent - Formularios</h2>
 
+<!-- Formulario de candidatos -->
 <section>
   <h3>Formulario para Candidatos</h3>
   <form id="formCandidato">
@@ -53,6 +54,75 @@
 
     <button type="submit">Enviar candidatura</button>
   </form>
+</section>
+
+<!-- Formulario de empresas -->
+<section>
+  <h3>Formulario para Empresas</h3>
+  <form id="formEmpresa">
+    <input type="text" placeholder="Nombre comercial" required>
+    <input type="text" placeholder="Nombre fiscal (razón social)" required>
+    <input type="text" placeholder="CIF / NIF" required>
+    <input type="email" placeholder="Email de la empresa" required>
+    <input type="tel" placeholder="Teléfono" required>
+    <input type="text" placeholder="Persona de contacto" required>
+
+    <label>Provincia del establecimiento</label>
+    <input list="provincias" placeholder="Buscar provincia" required>
+
+    <label>Ayuntamiento del establecimiento</label>
+    <input list="ayuntamientos" placeholder="Buscar ayuntamiento" required>
+
+    <button type="submit">Enviar datos de la empresa</button>
+  </form>
+</section>
+
+<!-- Acceso y búsqueda de empresas autorizadas -->
+<section>
+  <h3>Acceso Empresas Autorizadas</h3>
+  <form id="loginEmpresa">
+    <input type="text" placeholder="Nombre de la empresa" required>
+    <input type="password" id="loginPassword" placeholder="Contraseña" required>
+    <button type="submit">Entrar</button>
+  </form>
+
+  <div id="busquedaCandidatos" style="display:none; margin-top:20px;">
+    <h4>Buscar Candidatos</h4>
+    <label>Provincia</label>
+    <input list="provincias" id="filtroProvincia" placeholder="Provincia">
+
+    <label>Ayuntamiento</label>
+    <input list="ayuntamientos" id="filtroAyuntamiento" placeholder="Ayuntamiento">
+
+    <label>Radio de distancia</label>
+    <select id="filtroDistancia">
+      <option value="">Cualquiera</option>
+      <option>Local</option>
+      <option>10 km</option>
+      <option>20 km</option>
+      <option>30 km</option>
+      <option>50 km</option>
+      <option>Sin límite</option>
+    </select>
+
+    <label>Puesto</label>
+    <select multiple size="8" id="filtroPuestos">
+      <option value="Camarero/a">Camarero/a</option>
+      <option value="Cocinero/a">Cocinero/a</option>
+      <option value="Ayudante de cocina">Ayudante de cocina</option>
+      <option value="Jefe/a de sala">Jefe/a de sala</option>
+      <option value="Recepcionista">Recepcionista</option>
+      <option value="Personal de hotel">Personal de hotel</option>
+      <option value="Personal de camping">Personal de camping</option>
+      <option value="Catering">Catering</option>
+      <option value="Barista">Barista</option>
+      <option value="Lavaplatos">Lavaplatos</option>
+      <option value="Conserje">Conserje</option>
+    </select>
+
+    <button id="buscarCandidatos">Buscar</button>
+    <ul id="resultadoBusqueda" style="margin-top:10px;"></ul>
+  </div>
 </section>
 
 <datalist id="provincias">
