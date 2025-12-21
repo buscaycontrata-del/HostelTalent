@@ -11,7 +11,7 @@ function cargarDeStorage(clave) {
 }
 
 // ===============
-// TABLA DE DISTANCIAS
+// TABLA DE DISTANCIAS ENTRE AYUNTAMIENTOS
 // ===============
 const distancias = {
   "Vigo": { "Vigo": 0, "Cangas": 29, "Moaña": 19, "Bueu": 29, "Nigrán": 15, "Oia": 50, "Redondela": 14, "Pontevedra": 28, "Soutomaior": 20 },
@@ -31,10 +31,25 @@ function getDistancia(ay1, ay2) {
 }
 
 // ===============
-// CARGA INICIAL
+// CARGA INICIAL: SOLO LA EMPRESA, SIN CANDIDATOS
 // ===============
-let candidatos = cargarDeStorage("candidatos");
+let candidatos = []; // ← ¡VACÍO! Se eliminan todos los candidatos
 let empresas = cargarDeStorage("empresas");
+
+// Si no hay empresas, creamos la de prueba
+if (empresas.length === 0) {
+  empresas = [{
+    nombreComercial: "HostelTalent",
+    nombreFiscal: "HostelTalent SL",
+    cif: "B12345678",
+    email: "test@gmail.com",
+    telefono: "600000000",
+    personaContacto: "Admin",
+    provincia: "Pontevedra",
+    ayuntamiento: "Vigo"
+  }];
+  guardarEnStorage("empresas", empresas);
+}
 
 // ===============
 // FORMULARIO CANDIDATO
@@ -129,7 +144,7 @@ document.getElementById("loginEmpresa").addEventListener("submit", function(e) {
 });
 
 // ===============
-// BÚSQUEDA DE CANDIDATOS (LÓGICA FINAL)
+// BÚSQUEDA DE CANDIDATOS (LÓGICA CORRECTA)
 // ===============
 document.getElementById("buscarCandidatos").addEventListener("click", function(e) {
   e.preventDefault();
@@ -142,7 +157,6 @@ document.getElementById("buscarCandidatos").addEventListener("click", function(e
     document.querySelectorAll("#filtroPuestos option:checked")
   ).map(opt => opt.value);
 
-  // Convertir distancia a número
   const parseKm = (dist) => {
     if (!dist) return Infinity;
     dist = dist.trim();
@@ -156,30 +170,28 @@ document.getElementById("buscarCandidatos").addEventListener("click", function(e
   };
 
   const resultados = candidatos.filter(c => {
-    // 1. Provincia
+    // Provincia
     if (provinciaFiltro && c.provincia !== provinciaFiltro) return false;
 
-    // 2. Puesto
+    // Puesto
     if (puestosFiltro.length > 0 && !puestosFiltro.some(p => c.puestos.includes(p))) return false;
 
-    // 3. Si no hay ayuntamiento, pasar
+    // Sin ayuntamiento → pasa
     if (!ayuntamientoFiltro) return true;
 
-    // 4. Distancia real
+    // Distancia real
     const d = getDistancia(ayuntamientoFiltro, c.ayuntamiento);
     if (d === Infinity) return false;
 
-    // 5. Si el candidato puso "Sin límite", siempre pasa
+    // Si candidato puso "Sin límite", pasa
     if (c.distancia === "Sin límite") return true;
 
-    // 6. Si la búsqueda es "Local", aparecen:
-    //    - Los del mismo ayuntamiento (d === 0)
-    //    - Y los que llegan por distancia (d <= radio del candidato)
+    // Si búsqueda es "Local"
     if (distanciaFiltro === "Local") {
       return d === 0 || d <= parseKm(c.distancia);
     }
 
-    // 7. Para otras distancias, usar ambos radios
+    // Otras distancias
     const kmCandidato = parseKm(c.distancia);
     const kmBusqueda = parseKm(distanciaFiltro);
     return d <= kmCandidato && d <= kmBusqueda;
