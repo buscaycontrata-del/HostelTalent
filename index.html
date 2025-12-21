@@ -12,7 +12,7 @@
       font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
     }
 
-    /* Fondo con formas abstractas suaves */
+    /* Fondo con formas abstractas suaves (como en la referencia) */
     body {
       background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
       padding: 24px;
@@ -45,53 +45,6 @@
       background: rgba(155, 89, 182, 0.05);
       border-radius: 50%;
       z-index: -1;
-    }
-
-    /* Menú fijo en la parte superior */
-    .navbar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      background: #ffffff;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-      padding: 12px 24px;
-      z-index: 1000;
-      display: flex;
-      justify-content: center;
-      gap: 16px;
-    }
-
-    .navbar button {
-      padding: 12px 24px;
-      font-size: 15px;
-      font-weight: 600;
-      border: none;
-      border-radius: 50px;
-      cursor: pointer;
-      transition: all 0.3s;
-      min-width: 160px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.08);
-      background: #3498db; /* Color corporativo uniforme */
-      color: white;
-    }
-
-    .navbar button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 12px rgba(0,0,0,0.12);
-    }
-
-    .navbar button#btnEmpresas {
-      background: #17a2b8;
-    }
-
-    .navbar button#btnEntrar {
-      background: #9b59b6;
-    }
-
-    /* Contenido principal (ajustado para no solaparse con el navbar) */
-    .content {
-      margin-top: 80px; /* Espacio para el menú fijo */
     }
 
     /* Títulos destacados */
@@ -191,6 +144,50 @@
       word-break: break-word;
     }
 
+    /* Menú principal (botones en la parte de abajo) */
+    .menu-principal {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 32px;
+      padding: 20px 0;
+      background: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+      position: sticky;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+    }
+
+    .menu-principal button {
+      padding: 12px 24px;
+      font-size: 15px;
+      font-weight: 600;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s;
+      min-width: 160px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+      background: #3498db; /* Color corporativo uniforme */
+      color: white;
+    }
+
+    .menu-principal button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.12);
+    }
+
+    .menu-principal button#btnEmpresas {
+      background: #17a2b8;
+    }
+
+    .menu-principal button#btnEntrar {
+      background: #9b59b6;
+    }
+
     /* Puestos */
     #puestosContainer {
       border: 1px solid #e9ecef;
@@ -243,19 +240,16 @@
 
     /* Responsive */
     @media (max-width: 768px) {
-      .navbar {
+      .menu-principal {
         flex-wrap: wrap;
-        padding: 12px 16px;
+        padding: 16px;
+        margin-top: 24px;
       }
 
-      .navbar button {
+      .menu-principal button {
         min-width: auto;
         flex: 1 1 100%;
         padding: 12px;
-      }
-
-      .content {
-        margin-top: 120px;
       }
 
       section {
@@ -270,243 +264,239 @@
 </head>
 <body>
 
-<!-- Menú fijo -->
-<div class="navbar">
+<!-- Logo -->
+<div class="logo-container">
+  <img src="https://github.com/buscaycontrata-del/HostelTalent/raw/main/Logo_para_APP_sin_fondo-.png" alt="HostelTalent - Conectando Profesionales">
+</div>
+
+<h2>HostelTalent - Formularios</h2>
+
+<!-- Formulario de candidatos -->
+<section id="seccionCandidatos" style="display:none;">
+  <h3>Formulario para Candidatos</h3>
+  <form id="formCandidato">
+    <input type="text" id="nombre" placeholder="Nombre y Apellidos" required>
+    <input type="email" id="email" placeholder="Email" required>
+    <input type="tel" id="telefono" placeholder="Teléfono" required>
+
+    <label>Provincia</label>
+    <input list="provincias" id="provincia" placeholder="Buscar provincia" required>
+
+    <label>Ayuntamiento</label>
+    <input list="ayuntamientos" id="ayuntamiento" placeholder="Buscar ayuntamiento" required>
+
+    <label>Distancia máxima</label>
+    <select id="distancia" required>
+      <option value="">Selecciona</option>
+      <option>Local</option>
+      <option>10 km</option>
+      <option>20 km</option>
+      <option>30 km</option>
+      <option>50 km</option>
+      <option>Sin límite</option>
+    </select>
+
+    <label>Puestos (marca los que apliquen)</label>
+    <div id="puestosContainer">
+      <input type="text" id="puestosBuscador" placeholder="Buscar puesto...">
+      <label><input type="checkbox" value="Camarero/a sala"> Camarero/a sala</label>
+      <label><input type="checkbox" value="Cocinero/a"> Cocinero/a</label>
+      <label><input type="checkbox" value="Agente de reservas"> Agente de reservas</label>
+      <label><input type="checkbox" value="Animador/a turístico/a"> Animador/a turístico/a</label>
+      <label><input type="checkbox" value="Auxiliar de cocina"> Auxiliar de cocina</label>
+      <label><input type="checkbox" value="Ayudante de camarero/a"> Ayudante de camarero/a</label>
+      <label><input type="checkbox" value="Ayudante de cocina"> Ayudante de cocina</label>
+      <label><input type="checkbox" value="Barista"> Barista</label>
+      <label><input type="checkbox" value="Barman"> Barman</label>
+      <label><input type="checkbox" value="Bartender"> Bartender</label>
+      <label><input type="checkbox" value="Botones / maletero"> Botones / maletero</label>
+      <label><input type="checkbox" value="Camarero/a de pisos"> Camarero/a de pisos</label>
+      <label><input type="checkbox" value="Chef ejecutivo/a"> Chef ejecutivo/a</label>
+      <label><input type="checkbox" value="Comercial de hotel / comercial B2B"> Comercial de hotel / comercial B2B</label>
+      <label><input type="checkbox" value="Conserje"> Conserje</label>
+      <label><input type="checkbox" value="Director/a de alimentos y bebidas (F&B manager)"> Director/a de alimentos y bebidas (F&B manager)</label>
+      <label><input type="checkbox" value="Director/a de hotel"> Director/a de hotel</label>
+      <label><input type="checkbox" value="Director/a de restaurante"> Director/a de restaurante</label>
+      <label><input type="checkbox" value="Event manager / responsable de eventos"> Event manager / responsable de eventos</label>
+      <label><input type="checkbox" value="Friegaplatos / platero / steward"> Friegaplatos / platero / steward</label>
+      <label><input type="checkbox" value="Gobernanta/e de hotel"> Gobernanta/e de hotel</label>
+      <label><input type="checkbox" value="Jefe/a de cocina"> Jefe/a de cocina</label>
+      <label><input type="checkbox" value="Jefe/a de operaciones / controller de operaciones"> Jefe/a de operaciones / controller de operaciones</label>
+      <label><input type="checkbox" value="Jefe/a de partida"> Jefe/a de partida</label>
+      <label><input type="checkbox" value="Jefe/a de recepción"> Jefe/a de recepción</label>
+      <label><input type="checkbox" value="Maître / jefe/a de sala"> Maître / jefe/a de sala</label>
+      <label><input type="checkbox" value="Panadero/a"> Panadero/a</label>
+      <label><input type="checkbox" value="Pastelero/a / repostero/a"> Pastelero/a / repostero/a</label>
+      <label><input type="checkbox" value="Personal administrativo / contable"> Personal administrativo / contable</label>
+      <label><input type="checkbox" value="Personal de lavandería"> Personal de lavandería</label>
+      <label><input type="checkbox" value="Personal de mantenimiento"> Personal de mantenimiento</label>
+      <label><input type="checkbox" value="Personal de room service / servicio de habitaciones"> Personal de room service / servicio de habitaciones</label>
+      <label><input type="checkbox" value="Recepcionista de hotel"> Recepcionista de hotel</label>
+      <label><input type="checkbox" value="Responsable de marketing y comunicación"> Responsable de marketing y comunicación</label>
+      <label><input type="checkbox" value="Responsable de RRHH en hostelería"> Responsable de RRHH en hostelería</label>
+      <label><input type="checkbox" value="Segundo/a de cocina"> Segundo/a de cocina</label>
+      <label><input type="checkbox" value="Sumiller"> Sumiller</label>
+    </div>
+
+    <label>Subir CV (PDF)</label>
+    <input type="file" id="cv" accept="application/pdf">
+
+    <button type="submit">Enviar candidatura</button>
+  </form>
+</section>
+
+<!-- Formulario de empresas -->
+<section id="seccionEmpresas" style="display:none;">
+  <h3>Formulario para Empresas</h3>
+  <form id="formEmpresa">
+    <input type="text" id="nombreComercial" placeholder="Nombre comercial" required>
+    <input type="text" id="nombreFiscal" placeholder="Nombre fiscal (razón social)" required>
+    <input type="text" id="cif" placeholder="CIF / NIF" required>
+    <input type="email" id="emailEmpresa" placeholder="Email de la empresa" required>
+    <input type="tel" id="telefonoEmpresa" placeholder="Teléfono" required>
+    <input type="text" id="personaContacto" placeholder="Persona de contacto" required>
+
+    <label>Provincia del establecimiento</label>
+    <input list="provincias" id="provinciaEmpresa" placeholder="Buscar provincia" required>
+
+    <label>Ayuntamiento del establecimiento</label>
+    <input list="ayuntamientos" id="ayuntamientoEmpresa" placeholder="Buscar ayuntamiento" required>
+
+    <button type="submit">Enviar datos de la empresa</button>
+  </form>
+</section>
+
+<!-- Acceso y búsqueda de empresas autorizadas -->
+<section id="seccionEntrar" style="display:none;">
+  <h3>Acceso Empresas Autorizadas</h3>
+  <form id="loginEmpresa">
+    <input type="email" id="emailLogin" placeholder="Email de la empresa" required>
+    <input type="password" id="loginPassword" placeholder="Contraseña" required>
+    <button type="submit">Entrar</button>
+  </form>
+
+  <div id="busquedaCandidatos" style="display:none; margin-top:20px;">
+    <h4>Buscar Candidatos</h4>
+
+    <label>Provincia</label>
+    <input list="provincias" id="filtroProvincia" placeholder="Provincia">
+
+    <label>Ayuntamiento</label>
+    <input list="ayuntamientos" id="filtroAyuntamiento" placeholder="Ayuntamiento">
+
+    <label>Radio de distancia</label>
+    <select id="filtroDistancia">
+      <option value="">Cualquiera</option>
+      <option>Local</option>
+      <option>10 km</option>
+      <option>20 km</option>
+      <option>30 km</option>
+      <option>50 km</option>
+      <option>Sin límite</option>
+    </select>
+
+    <label>Puesto</label>
+    <select multiple size="8" id="filtroPuestos">
+      <option value="Camarero/a sala">Camarero/a sala</option>
+      <option value="Cocinero/a">Cocinero/a</option>
+      <option value="Agente de reservas">Agente de reservas</option>
+      <option value="Animador/a turístico/a">Animador/a turístico/a</option>
+      <option value="Auxiliar de cocina">Auxiliar de cocina</option>
+      <option value="Ayudante de camarero/a">Ayudante de camarero/a</option>
+      <option value="Ayudante de cocina">Ayudante de cocina</option>
+      <option value="Barista">Barista</option>
+      <option value="Barman">Barman</option>
+      <option value="Bartender">Bartender</option>
+      <option value="Botones / maletero">Botones / maletero</option>
+      <option value="Camarero/a de pisos">Camarero/a de pisos</option>
+      <option value="Chef ejecutivo/a">Chef ejecutivo/a</option>
+      <option value="Comercial de hotel / comercial B2B">Comercial de hotel / comercial B2B</option>
+      <option value="Conserje">Conserje</option>
+      <option value="Director/a de alimentos y bebidas (F&B manager)">Director/a de alimentos y bebidas (F&B manager)</option>
+      <option value="Director/a de hotel">Director/a de hotel</option>
+      <option value="Director/a de restaurante">Director/a de restaurante</option>
+      <option value="Event manager / responsable de eventos">Event manager / responsable de eventos</option>
+      <option value="Friegaplatos / platero / steward">Friegaplatos / platero / steward</option>
+      <option value="Gobernanta/e de hotel">Gobernanta/e de hotel</option>
+      <option value="Jefe/a de cocina">Jefe/a de cocina</option>
+      <option value="Jefe/a de operaciones / controller de operaciones">Jefe/a de operaciones / controller de operaciones</option>
+      <option value="Jefe/a de partida">Jefe/a de partida</option>
+      <option value="Jefe/a de recepción">Jefe/a de recepción</option>
+      <option value="Maître / jefe/a de sala">Maître / jefe/a de sala</option>
+      <option value="Panadero/a">Panadero/a</option>
+      <option value="Pastelero/a / repostero/a">Pastelero/a / repostero/a</option>
+      <option value="Personal administrativo / contable">Personal administrativo / contable</option>
+      <option value="Personal de lavandería">Personal de lavandería</option>
+      <option value="Personal de mantenimiento">Personal de mantenimiento</option>
+      <option value="Personal de room service / servicio de habitaciones">Personal de room service / servicio de habitaciones</option>
+      <option value="Recepcionista de hotel">Recepcionista de hotel</option>
+      <option value="Responsable de marketing y comunicación">Responsable de marketing y comunicación</option>
+      <option value="Responsable de RRHH en hostelería">Responsable de RRHH en hostelería</option>
+      <option value="Segundo/a de cocina">Segundo/a de cocina</option>
+      <option value="Sumiller">Sumiller</option>
+    </select>
+
+    <button id="buscarCandidatos">Buscar</button>
+    <ul id="resultadoBusqueda" style="margin-top:10px;"></ul>
+  </div>
+</section>
+
+<datalist id="provincias">
+  <option value="A Coruña">
+  <option value="Lugo">
+  <option value="Ourense">
+  <option value="Pontevedra">
+</datalist>
+
+<datalist id="ayuntamientos">
+  <option value="A Coruña">
+  <option value="Santiago de Compostela">
+  <option value="Ferrol">
+  <option value="Lugo">
+  <option value="Ourense">
+  <option value="Vigo">
+  <option value="Pontevedra">
+</datalist>
+
+<script src="script.js"></script>
+<script>
+  // Mostrar/ocultar secciones
+  document.getElementById("btnCandidatos").onclick = () => {
+    document.getElementById("seccionCandidatos").style.display = "block";
+    document.getElementById("seccionEmpresas").style.display = "none";
+    document.getElementById("seccionEntrar").style.display = "none";
+  };
+  document.getElementById("btnEmpresas").onclick = () => {
+    document.getElementById("seccionCandidatos").style.display = "none";
+    document.getElementById("seccionEmpresas").style.display = "block";
+    document.getElementById("seccionEntrar").style.display = "none";
+  };
+  document.getElementById("btnEntrar").onclick = () => {
+    document.getElementById("seccionCandidatos").style.display = "none";
+    document.getElementById("seccionEmpresas").style.display = "none";
+    document.getElementById("seccionEntrar").style.display = "block";
+  };
+
+  // Buscador dinámico en el formulario de candidatos
+  document.getElementById("puestosBuscador").addEventListener("input", function() {
+    const filtro = this.value.toLowerCase();
+    const labels = this.parentElement.querySelectorAll("label:not(:first-child)");
+    labels.forEach(label => {
+      const texto = label.textContent.toLowerCase();
+      label.style.display = texto.includes(filtro) ? "block" : "none";
+    });
+  });
+</script>
+
+<!-- Menú principal (botones en la parte de abajo) -->
+<div class="menu-principal">
   <button id="btnCandidatos">Alta de candidatos/as</button>
   <button id="btnEmpresas">Alta de empresas</button>
   <button id="btnEntrar">Entrar (empresas autorizadas)</button>
 </div>
 
-<!-- Contenido principal -->
-<div class="content">
-
-  <!-- Logo -->
-  <div class="logo-container">
-    <img src="https://github.com/buscaycontrata-del/HostelTalent/raw/main/Logo_para_APP_sin_fondo-.png" alt="HostelTalent - Conectando Profesionales">
-  </div>
-
-  <h2>HostelTalent - Formularios</h2>
-
-  <!-- Formulario de candidatos -->
-  <section id="seccionCandidatos" style="display:none;">
-    <h3>Formulario para Candidatos</h3>
-    <form id="formCandidato">
-      <input type="text" id="nombre" placeholder="Nombre y Apellidos" required>
-      <input type="email" id="email" placeholder="Email" required>
-      <input type="tel" id="telefono" placeholder="Teléfono" required>
-
-      <label>Provincia</label>
-      <input list="provincias" id="provincia" placeholder="Buscar provincia" required>
-
-      <label>Ayuntamiento</label>
-      <input list="ayuntamientos" id="ayuntamiento" placeholder="Buscar ayuntamiento" required>
-
-      <label>Distancia máxima</label>
-      <select id="distancia" required>
-        <option value="">Selecciona</option>
-        <option>Local</option>
-        <option>10 km</option>
-        <option>20 km</option>
-        <option>30 km</option>
-        <option>50 km</option>
-        <option>Sin límite</option>
-      </select>
-
-      <label>Puestos (marca los que apliquen)</label>
-      <div id="puestosContainer">
-        <input type="text" id="puestosBuscador" placeholder="Buscar puesto...">
-        <label><input type="checkbox" value="Camarero/a sala"> Camarero/a sala</label>
-        <label><input type="checkbox" value="Cocinero/a"> Cocinero/a</label>
-        <label><input type="checkbox" value="Agente de reservas"> Agente de reservas</label>
-        <label><input type="checkbox" value="Animador/a turístico/a"> Animador/a turístico/a</label>
-        <label><input type="checkbox" value="Auxiliar de cocina"> Auxiliar de cocina</label>
-        <label><input type="checkbox" value="Ayudante de camarero/a"> Ayudante de camarero/a</label>
-        <label><input type="checkbox" value="Ayudante de cocina"> Ayudante de cocina</label>
-        <label><input type="checkbox" value="Barista"> Barista</label>
-        <label><input type="checkbox" value="Barman"> Barman</label>
-        <label><input type="checkbox" value="Bartender"> Bartender</label>
-        <label><input type="checkbox" value="Botones / maletero"> Botones / maletero</label>
-        <label><input type="checkbox" value="Camarero/a de pisos"> Camarero/a de pisos</label>
-        <label><input type="checkbox" value="Chef ejecutivo/a"> Chef ejecutivo/a</label>
-        <label><input type="checkbox" value="Comercial de hotel / comercial B2B"> Comercial de hotel / comercial B2B</label>
-        <label><input type="checkbox" value="Conserje"> Conserje</label>
-        <label><input type="checkbox" value="Director/a de alimentos y bebidas (F&B manager)"> Director/a de alimentos y bebidas (F&B manager)</label>
-        <label><input type="checkbox" value="Director/a de hotel"> Director/a de hotel</label>
-        <label><input type="checkbox" value="Director/a de restaurante"> Director/a de restaurante</label>
-        <label><input type="checkbox" value="Event manager / responsable de eventos"> Event manager / responsable de eventos</label>
-        <label><input type="checkbox" value="Friegaplatos / platero / steward"> Friegaplatos / platero / steward</label>
-        <label><input type="checkbox" value="Gobernanta/e de hotel"> Gobernanta/e de hotel</label>
-        <label><input type="checkbox" value="Jefe/a de cocina"> Jefe/a de cocina</label>
-        <label><input type="checkbox" value="Jefe/a de operaciones / controller de operaciones"> Jefe/a de operaciones / controller de operaciones</label>
-        <label><input type="checkbox" value="Jefe/a de partida"> Jefe/a de partida</label>
-        <label><input type="checkbox" value="Jefe/a de recepción"> Jefe/a de recepción</label>
-        <label><input type="checkbox" value="Maître / jefe/a de sala"> Maître / jefe/a de sala</label>
-        <label><input type="checkbox" value="Panadero/a"> Panadero/a</label>
-        <label><input type="checkbox" value="Pastelero/a / repostero/a"> Pastelero/a / repostero/a</label>
-        <label><input type="checkbox" value="Personal administrativo / contable"> Personal administrativo / contable</label>
-        <label><input type="checkbox" value="Personal de lavandería"> Personal de lavandería</label>
-        <label><input type="checkbox" value="Personal de mantenimiento"> Personal de mantenimiento</label>
-        <label><input type="checkbox" value="Personal de room service / servicio de habitaciones"> Personal de room service / servicio de habitaciones</label>
-        <label><input type="checkbox" value="Recepcionista de hotel"> Recepcionista de hotel</label>
-        <label><input type="checkbox" value="Responsable de marketing y comunicación"> Responsable de marketing y comunicación</label>
-        <label><input type="checkbox" value="Responsable de RRHH en hostelería"> Responsable de RRHH en hostelería</label>
-        <label><input type="checkbox" value="Segundo/a de cocina"> Segundo/a de cocina</label>
-        <label><input type="checkbox" value="Sumiller"> Sumiller</label>
-      </div>
-
-      <label>Subir CV (PDF)</label>
-      <input type="file" id="cv" accept="application/pdf">
-
-      <button type="submit">Enviar candidatura</button>
-    </form>
-  </section>
-
-  <!-- Formulario de empresas -->
-  <section id="seccionEmpresas" style="display:none;">
-    <h3>Formulario para Empresas</h3>
-    <form id="formEmpresa">
-      <input type="text" id="nombreComercial" placeholder="Nombre comercial" required>
-      <input type="text" id="nombreFiscal" placeholder="Nombre fiscal (razón social)" required>
-      <input type="text" id="cif" placeholder="CIF / NIF" required>
-      <input type="email" id="emailEmpresa" placeholder="Email de la empresa" required>
-      <input type="tel" id="telefonoEmpresa" placeholder="Teléfono" required>
-      <input type="text" id="personaContacto" placeholder="Persona de contacto" required>
-
-      <label>Provincia del establecimiento</label>
-      <input list="provincias" id="provinciaEmpresa" placeholder="Buscar provincia" required>
-
-      <label>Ayuntamiento del establecimiento</label>
-      <input list="ayuntamientos" id="ayuntamientoEmpresa" placeholder="Buscar ayuntamiento" required>
-
-      <button type="submit">Enviar datos de la empresa</button>
-    </form>
-  </section>
-
-  <!-- Acceso y búsqueda de empresas autorizadas -->
-  <section id="seccionEntrar" style="display:none;">
-    <h3>Acceso Empresas Autorizadas</h3>
-    <form id="loginEmpresa">
-      <input type="email" id="emailLogin" placeholder="Email de la empresa" required>
-      <input type="password" id="loginPassword" placeholder="Contraseña" required>
-      <button type="submit">Entrar</button>
-    </form>
-
-    <div id="busquedaCandidatos" style="display:none; margin-top:20px;">
-      <h4>Buscar Candidatos</h4>
-
-      <label>Provincia</label>
-      <input list="provincias" id="filtroProvincia" placeholder="Provincia">
-
-      <label>Ayuntamiento</label>
-      <input list="ayuntamientos" id="filtroAyuntamiento" placeholder="Ayuntamiento">
-
-      <label>Radio de distancia</label>
-      <select id="filtroDistancia">
-        <option value="">Cualquiera</option>
-        <option>Local</option>
-        <option>10 km</option>
-        <option>20 km</option>
-        <option>30 km</option>
-        <option>50 km</option>
-        <option>Sin límite</option>
-      </select>
-
-      <label>Puesto</label>
-      <select multiple size="8" id="filtroPuestos">
-        <option value="Camarero/a sala">Camarero/a sala</option>
-        <option value="Cocinero/a">Cocinero/a</option>
-        <option value="Agente de reservas">Agente de reservas</option>
-        <option value="Animador/a turístico/a">Animador/a turístico/a</option>
-        <option value="Auxiliar de cocina">Auxiliar de cocina</option>
-        <option value="Ayudante de camarero/a">Ayudante de camarero/a</option>
-        <option value="Ayudante de cocina">Ayudante de cocina</option>
-        <option value="Barista">Barista</option>
-        <option value="Barman">Barman</option>
-        <option value="Bartender">Bartender</option>
-        <option value="Botones / maletero">Botones / maletero</option>
-        <option value="Camarero/a de pisos">Camarero/a de pisos</option>
-        <option value="Chef ejecutivo/a">Chef ejecutivo/a</option>
-        <option value="Comercial de hotel / comercial B2B">Comercial de hotel / comercial B2B</option>
-        <option value="Conserje">Conserje</option>
-        <option value="Director/a de alimentos y bebidas (F&B manager)">Director/a de alimentos y bebidas (F&B manager)</option>
-        <option value="Director/a de hotel">Director/a de hotel</option>
-        <option value="Director/a de restaurante">Director/a de restaurante</option>
-        <option value="Event manager / responsable de eventos">Event manager / responsable de eventos</option>
-        <option value="Friegaplatos / platero / steward">Friegaplatos / platero / steward</option>
-        <option value="Gobernanta/e de hotel">Gobernanta/e de hotel</option>
-        <option value="Jefe/a de cocina">Jefe/a de cocina</option>
-        <option value="Jefe/a de operaciones / controller de operaciones">Jefe/a de operaciones / controller de operaciones</option>
-        <option value="Jefe/a de partida">Jefe/a de partida</option>
-        <option value="Jefe/a de recepción">Jefe/a de recepción</option>
-        <option value="Maître / jefe/a de sala">Maître / jefe/a de sala</option>
-        <option value="Panadero/a">Panadero/a</option>
-        <option value="Pastelero/a / repostero/a">Pastelero/a / repostero/a</option>
-        <option value="Personal administrativo / contable">Personal administrativo / contable</option>
-        <option value="Personal de lavandería">Personal de lavandería</option>
-        <option value="Personal de mantenimiento">Personal de mantenimiento</option>
-        <option value="Personal de room service / servicio de habitaciones">Personal de room service / servicio de habitaciones</option>
-        <option value="Recepcionista de hotel">Recepcionista de hotel</option>
-        <option value="Responsable de marketing y comunicación">Responsable de marketing y comunicación</option>
-        <option value="Responsable de RRHH en hostelería">Responsable de RRHH en hostelería</option>
-        <option value="Segundo/a de cocina">Segundo/a de cocina</option>
-        <option value="Sumiller">Sumiller</option>
-      </select>
-
-      <button id="buscarCandidatos">Buscar</button>
-      <ul id="resultadoBusqueda" style="margin-top:10px;"></ul>
-    </div>
-  </section>
-
-  <datalist id="provincias">
-    <option value="A Coruña">
-    <option value="Lugo">
-    <option value="Ourense">
-    <option value="Pontevedra">
-  </datalist>
-
-  <datalist id="ayuntamientos">
-    <option value="A Coruña">
-    <option value="Santiago de Compostela">
-    <option value="Ferrol">
-    <option value="Lugo">
-    <option value="Ourense">
-    <option value="Vigo">
-    <option value="Pontevedra">
-  </datalist>
-
-  <script src="script.js"></script>
-  <script>
-    // Mostrar/ocultar secciones
-    document.getElementById("btnCandidatos").onclick = () => {
-      document.getElementById("seccionCandidatos").style.display = "block";
-      document.getElementById("seccionEmpresas").style.display = "none";
-      document.getElementById("seccionEntrar").style.display = "none";
-    };
-    document.getElementById("btnEmpresas").onclick = () => {
-      document.getElementById("seccionCandidatos").style.display = "none";
-      document.getElementById("seccionEmpresas").style.display = "block";
-      document.getElementById("seccionEntrar").style.display = "none";
-    };
-    document.getElementById("btnEntrar").onclick = () => {
-      document.getElementById("seccionCandidatos").style.display = "none";
-      document.getElementById("seccionEmpresas").style.display = "none";
-      document.getElementById("seccionEntrar").style.display = "block";
-    };
-
-    // Buscador dinámico en el formulario de candidatos
-    document.getElementById("puestosBuscador").addEventListener("input", function() {
-      const filtro = this.value.toLowerCase();
-      const labels = this.parentElement.querySelectorAll("label:not(:first-child)");
-      labels.forEach(label => {
-        const texto = label.textContent.toLowerCase();
-        label.style.display = texto.includes(filtro) ? "block" : "none";
-      });
-    });
-  </script>
-
-  <footer>
-    © 2025 HostelTalent. Todos los derechos reservados.
-  </footer>
-</div>
+<footer>
+  © 2025 HostelTalent. Todos los derechos reservados.
+</footer>
 </body>
 </html>
