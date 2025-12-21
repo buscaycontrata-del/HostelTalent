@@ -3,40 +3,205 @@
 <head>
   <meta charset="UTF-8">
   <title>HostelTalent - Formularios</title>
-  <link rel="stylesheet" href="style.css?v=2">
   <style>
-    /* Estilo para los botones principales */
-    .menu-principal {
+    /* Reset simple */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    /* Contenedor general */
+    body {
+      background-color: #f5f7fa;
+      padding: 20px;
+      line-height: 1.6;
+      color: #333;
+    }
+
+    /* Títulos */
+    h2, h3, h4 {
+      margin-bottom: 12px;
+      color: #2c3e50;
+      font-weight: 600;
+    }
+
+    /* Secciones */
+    section {
+      background-color: #fff;
+      padding: 20px;
+      margin-bottom: 24px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      border: 1px solid #eaecef;
+    }
+
+    /* Formularios */
+    form {
       display: flex;
       flex-direction: column;
       gap: 12px;
-      margin-bottom: 25px;
     }
+
+    form input,
+    form select,
+    form button {
+      padding: 10px 12px;
+      font-size: 14px;
+      border: 1px solid #dfe3e8;
+      border-radius: 6px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    form input:focus,
+    form select:focus {
+      outline: none;
+      border-color: #3498db;
+      box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.1);
+    }
+
+    form button {
+      background-color: #3498db;
+      color: white;
+      cursor: pointer;
+      border: none;
+      font-weight: 500;
+      padding: 10px 16px;
+      border-radius: 6px;
+      transition: background-color 0.2s, transform 0.1s;
+    }
+
+    form button:hover {
+      background-color: #2980b9;
+      transform: translateY(-1px);
+    }
+
+    form button:active {
+      transform: translateY(0);
+    }
+
+    /* Labels */
+    label {
+      font-weight: 600;
+      margin-top: 8px;
+      margin-bottom: 4px;
+      color: #2c3e50;
+      font-size: 14px;
+    }
+
+    /* Resultado de búsqueda */
+    #resultadoBusqueda {
+      list-style: none;
+      padding-left: 0;
+      margin-top: 12px;
+    }
+
+    #resultadoBusqueda li {
+      background-color: #f8f9fa;
+      padding: 10px 14px;
+      border-radius: 6px;
+      margin-bottom: 8px;
+      border-left: 4px solid #3498db;
+      font-size: 14px;
+      word-break: break-word;
+    }
+
+    /* Menú principal (botones) */
+    .menu-principal {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
     .menu-principal button {
-      padding: 14px;
-      font-size: 18px;
-      background-color: #28a745;
+      padding: 12px 20px;
+      font-size: 15px;
+      background-color: #3498db;
       color: white;
       border: none;
-      border-radius: 8px;
+      border-radius: 6px;
       cursor: pointer;
-      transition: background-color 0.2s;
+      transition: background-color 0.2s, transform 0.1s;
+      font-weight: 500;
+      flex: 1 1 calc(33% - 8px);
+      min-width: 180px;
+      text-align: center;
     }
+
     .menu-principal button:hover {
-      background-color: #218838;
+      background-color: #2980b9;
+      transform: translateY(-1px);
     }
+
+    .menu-principal button:active {
+      transform: translateY(0);
+    }
+
     .menu-principal button#btnEmpresas {
       background-color: #17a2b8;
     }
+
     .menu-principal button#btnEmpresas:hover {
       background-color: #138496;
     }
+
     .menu-principal button#btnEntrar {
       background-color: #ffc107;
       color: #212529;
     }
+
     .menu-principal button#btnEntrar:hover {
       background-color: #e0a800;
+    }
+
+    /* Datalist (opciones de provincia/ayuntamiento) */
+    datalist option {
+      padding: 6px 10px;
+      font-size: 14px;
+    }
+
+    /* Input file (CV) */
+    input[type="file"] {
+      padding: 8px 12px;
+      border: 1px dashed #dfe3e8;
+      background-color: #fafbfc;
+      cursor: pointer;
+    }
+
+    input[type="file"]:hover {
+      border-color: #3498db;
+    }
+
+    /* Select multiple (puestos) */
+    select[multiple] {
+      min-height: 120px;
+      padding: 8px;
+      border: 1px solid #dfe3e8;
+      border-radius: 6px;
+      font-size: 14px;
+      background-color: #fff;
+    }
+
+    /* Checkbox y radio */
+    input[type="checkbox"],
+    input[type="radio"] {
+      width: 16px;
+      height: 16px;
+      margin-right: 8px;
+      cursor: pointer;
+    }
+
+    /* Ajustes generales */
+    @media (max-width: 768px) {
+      .menu-principal button {
+        flex: 1 1 100%;
+        min-width: auto;
+      }
+      section {
+        padding: 16px;
+      }
     }
   </style>
 </head>
