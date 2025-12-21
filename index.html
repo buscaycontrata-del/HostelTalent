@@ -4,13 +4,55 @@
   <meta charset="UTF-8">
   <title>HostelTalent - Formularios</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    /* Estilo para los botones principales */
+    .menu-principal {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 25px;
+    }
+    .menu-principal button {
+      padding: 14px;
+      font-size: 18px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+    .menu-principal button:hover {
+      background-color: #218838;
+    }
+    .menu-principal button#btnEmpresas {
+      background-color: #17a2b8;
+    }
+    .menu-principal button#btnEmpresas:hover {
+      background-color: #138496;
+    }
+    .menu-principal button#btnEntrar {
+      background-color: #ffc107;
+      color: #212529;
+    }
+    .menu-principal button#btnEntrar:hover {
+      background-color: #e0a800;
+    }
+  </style>
 </head>
 <body>
 
 <h2>HostelTalent - Formularios</h2>
 
+<!-- Menú principal -->
+<div class="menu-principal">
+  <button id="btnCandidatos">Alta de candidatos/as</button>
+  <button id="btnEmpresas">Alta de empresas</button>
+  <button id="btnEntrar">Entrar (empresas autorizadas)</button>
+</div>
+
 <!-- Formulario de candidatos -->
-<section>
+<section id="seccionCandidatos" style="display:none;">
   <h3>Formulario para Candidatos</h3>
   <form id="formCandidato">
     <input type="text" id="nombre" placeholder="Nombre y Apellidos" required>
@@ -57,7 +99,7 @@
 </section>
 
 <!-- Formulario de empresas -->
-<section>
+<section id="seccionEmpresas" style="display:none;">
   <h3>Formulario para Empresas</h3>
   <form id="formEmpresa">
     <input type="text" id="nombreComercial" placeholder="Nombre comercial" required>
@@ -78,7 +120,7 @@
 </section>
 
 <!-- Acceso y búsqueda de empresas autorizadas -->
-<section>
+<section id="seccionEntrar" style="display:none;">
   <h3>Acceso Empresas Autorizadas</h3>
   <form id="loginEmpresa">
     <input type="email" id="emailLogin" placeholder="Email de la empresa" required>
@@ -144,5 +186,23 @@
 </datalist>
 
 <script src="script.js"></script>
+<script>
+  // Mostrar/ocultar secciones
+  document.getElementById("btnCandidatos").onclick = () => {
+    document.getElementById("seccionCandidatos").style.display = "block";
+    document.getElementById("seccionEmpresas").style.display = "none";
+    document.getElementById("seccionEntrar").style.display = "none";
+  };
+  document.getElementById("btnEmpresas").onclick = () => {
+    document.getElementById("seccionCandidatos").style.display = "none";
+    document.getElementById("seccionEmpresas").style.display = "block";
+    document.getElementById("seccionEntrar").style.display = "none";
+  };
+  document.getElementById("btnEntrar").onclick = () => {
+    document.getElementById("seccionCandidatos").style.display = "none";
+    document.getElementById("seccionEmpresas").style.display = "none";
+    document.getElementById("seccionEntrar").style.display = "block";
+  };
+</script>
 </body>
 </html>
