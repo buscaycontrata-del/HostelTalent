@@ -129,7 +129,7 @@ document.getElementById("loginEmpresa").addEventListener("submit", function(e) {
 });
 
 // ===============
-// BÚSQUEDA DE CANDIDATOS (CORREGIDA)
+// BÚSQUEDA DE CANDIDATOS (VERSÍON FINAL)
 // ===============
 document.getElementById("buscarCandidatos").addEventListener("click", function(e) {
   e.preventDefault();
@@ -142,8 +142,8 @@ document.getElementById("buscarCandidatos").addEventListener("click", function(e
     document.querySelectorAll("#filtroPuestos option:checked")
   ).map(opt => opt.value);
 
-  // Convertir la distancia de búsqueda a km
-  function parseDistancia(dist) {
+  // Convertir distancia a número
+  const parseKm = (dist) => {
     if (dist === "Sin límite") return Infinity;
     if (dist === "Local") return 0;
     if (dist === "10 km") return 10;
@@ -151,9 +151,9 @@ document.getElementById("buscarCandidatos").addEventListener("click", function(e
     if (dist === "30 km") return 30;
     if (dist === "50 km") return 50;
     return Infinity;
-  }
+  };
 
-  const kmBusqueda = parseDistancia(distanciaFiltro);
+  const kmBusqueda = parseKm(distanciaFiltro);
 
   const resultados = candidatos.filter(c => {
     // 1. Provincia
@@ -162,20 +162,21 @@ document.getElementById("buscarCandidatos").addEventListener("click", function(e
     // 2. Puesto
     if (puestosFiltro.length > 0 && !puestosFiltro.some(p => c.puestos.includes(p))) return false;
 
-    // 3. Si no hay ayuntamiento, pasar
+    // 3. Si no hay ayuntamiento, no filtrar por ubicación
     if (!ayuntamientoFiltro) return true;
 
     // 4. Distancia real
     const d = getDistancia(ayuntamientoFiltro, c.ayuntamiento);
     if (d === Infinity) return false;
 
-    // 5. Distancia del candidato
-    const kmCandidato = parseDistancia(c.distancia);
+    // 5. El candidato debe aceptar la distancia real
+    const kmCandidato = parseKm(c.distancia);
+    if (d > kmCandidato) return false;
 
-    // 6. Aparece si:
-    //    - La distancia real está dentro del radio del candidato (d <= kmCandidato)
-    //    - Y la distancia real está dentro del radio de búsqueda (d <= kmBusqueda)
-    return d <= kmCandidato && d <= kmBusqueda;
+    // 6. La empresa también debe cubrir la distancia real (si puso límite)
+    if (kmBusqueda !== Infinity && d > kmBusqueda) return false;
+
+    return true;
   });
 
   const ul = document.getElementById("resultadoBusqueda");
