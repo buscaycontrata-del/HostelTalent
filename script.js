@@ -45,16 +45,12 @@ document.getElementById("loginEmpresa")?.addEventListener("submit", e => {
 document.getElementById("buscarCandidatos")?.addEventListener("click", e => {
   e.preventDefault();
 
-  const texto = document.getElementById("busquedaTexto")?.value.toLowerCase() || "";
+  const texto = (document.getElementById("busquedaTexto")?.value || "").toLowerCase();
   const provincia = document.getElementById("filtroProvincia")?.value;
   const ayuntamiento = document.getElementById("filtroAyuntamiento")?.value;
   const distancia = document.getElementById("filtroDistancia")?.value;
 
-  // Usamos directamente los candidatos guardados con checkboxes
-  const puestosFiltro = Array.from(
-    document.querySelectorAll("#filtroPuestos option:checked")
-  ).map(o => o.value);
-
+  // Cambio mínimo: tomamos todos los candidatos guardados en memoria
   const resultado = (window.candidatos || []).filter(c => {
     let match = true;
 
@@ -73,7 +69,11 @@ document.getElementById("buscarCandidatos")?.addEventListener("click", e => {
       match = match && (c.distancia === distancia || c.distancia === "Sin límite");
     }
 
-    // Cambio mínimo: comparamos los puestos seleccionados del candidato con los filtros, si hay filtros
+    // PUESTOS: comparamos los puestos guardados, si hay opciones marcadas en el filtro
+    const puestosFiltro = Array.from(
+      document.querySelectorAll("#filtroPuestos option:checked")
+    ).map(o => o.value);
+
     if (puestosFiltro.length > 0) {
       match = match && puestosFiltro.some(p => c.puestos.includes(p));
     }
