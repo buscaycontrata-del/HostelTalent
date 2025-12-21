@@ -115,13 +115,29 @@
       border-radius: 12px;
     }
 
-    form button {
-      background: #2c3e50;
-      color: white;
+    /* Botones de acción (enviar, volver, nueva búsqueda) */
+    form button[type="submit"],
+    .btn-volver,
+    #buscarCandidatos,
+    #nuevaBusquedaBtn {
+      background: #d6e7f5;
+      color: #2c3e50;
       border: none;
       font-weight: 600;
       cursor: pointer;
-      border-radius: 12px;
+      border-radius: 50px;
+      padding: 12px 24px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+      font-size: 15px;
+      transition: all 0.3s;
+    }
+
+    form button[type="submit"]:hover,
+    .btn-volver:hover,
+    #buscarCandidatos:hover,
+    #nuevaBusquedaBtn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.12);
     }
 
     label {
@@ -183,21 +199,6 @@
       height: auto;
       border-radius: 12px;
       box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
-    }
-
-    .btn-volver {
-      background: #95a5a6;
-      color: white;
-      border: none;
-      padding: 10px 16px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-weight: 500;
-      margin-top: 16px;
-    }
-
-    .btn-volver:hover {
-      background: #7f8c8d;
     }
 
     footer {
@@ -331,7 +332,7 @@
     <button type="button" class="btn-volver" onclick="volverPrincipal()">Volver</button>
   </form>
   <div id="busquedaCandidatos" style="display:none; margin-top:20px;">
-    <h4>Buscar Candidatos</h4>
+    <h4 style="margin-bottom: 8px;">Buscar Candidatos</h4>
     <label>Provincia</label>
     <input list="provincias" id="filtroProvincia" placeholder="Provincia">
     <label>Ayuntamiento</label>
@@ -387,7 +388,7 @@
       <option value="Sumiller">Sumiller</option>
     </select>
     <button id="buscarCandidatos">Buscar</button>
-    <button type="button" class="btn-volver" style="margin-top:12px;" onclick="
+    <button type="button" id="nuevaBusquedaBtn" style="margin-top:12px;" onclick="
       document.getElementById('filtroProvincia').value = '';
       document.getElementById('filtroAyuntamiento').value = '';
       document.getElementById('filtroDistancia').value = '';
