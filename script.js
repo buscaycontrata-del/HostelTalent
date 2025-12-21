@@ -7,6 +7,10 @@ document.getElementById("formCandidato").addEventListener("submit", e => {
     document.querySelectorAll("#puestosContainer input[type='checkbox']:checked")
   ).map(cb => cb.value);
 
+  // Obtener nombre del CV (simulación)
+  const cvInput = document.getElementById("cv");
+  const cvNombre = cvInput.files.length > 0 ? cvInput.files[0].name : "No subido";
+
   window.candidatos = window.candidatos || [];
 
   window.candidatos.push({
@@ -16,11 +20,14 @@ document.getElementById("formCandidato").addEventListener("submit", e => {
     provincia: document.getElementById("provincia").value,
     ayuntamiento: document.getElementById("ayuntamiento").value,
     distancia: document.getElementById("distancia").value,
-    puestos: puestosSeleccionados
+    puestos: puestosSeleccionados,
+    cv: cvNombre // Guardamos el nombre del archivo
   });
 
   alert("Candidato guardado correctamente");
   e.target.reset();
+  // Reiniciar el campo de archivo (opcional)
+  document.getElementById("cv").value = "";
 });
 
 // Formulario de empresas
@@ -50,7 +57,7 @@ document.getElementById("buscarCandidatos")?.addEventListener("click", e => {
   const ayuntamiento = document.getElementById("filtroAyuntamiento")?.value;
   const distancia = document.getElementById("filtroDistancia")?.value;
 
-  // Cambio mínimo: filtramos los candidatos usando sus puestos reales guardados en memoria
+  // Obtener puestos seleccionados en el filtro
   const puestosFiltro = Array.from(
     document.querySelectorAll("#filtroPuestos option:checked")
   ).map(o => o.value);
@@ -58,24 +65,33 @@ document.getElementById("buscarCandidatos")?.addEventListener("click", e => {
   const resultado = (window.candidatos || []).filter(c => {
     let match = true;
 
+    // Búsqueda libre por nombre, ayuntamiento o puesto
     if (texto) {
-      match = match && (
+      const coincideTexto = 
         c.nombre.toLowerCase().includes(texto) ||
         c.ayuntamiento.toLowerCase().includes(texto) ||
-        c.puestos.some(p => p.toLowerCase().includes(texto))
-      );
+        c.puestos.some(p => p.toLowerCase().includes(texto));
+      if (!coincideTexto) match = false;
     }
 
-    if (provincia) match = match && c.provincia === provincia;
-    if (ayuntamiento) match = match && c.ayuntamiento === ayuntamiento;
+    // Filtro por provincia
+    if (provincia && c.provincia !== provincia) match = false;
 
-    if (distancia && c.distancia !== "Sin límite") {
-      match = match && (c.distancia === distancia || c.distancia === "Sin límite");
+    // Filtro por ayuntamiento
+    if (ayuntamiento && c.ayuntamiento !== ayuntamiento) match = false;
+
+    // Filtro por distancia
+    if (distancia && distancia !== "Cualquiera") {
+      // Si el candidato acepta "Sin límite", siempre coincide
+      if (c.distancia !== "Sin límite" && c.distancia !== distancia) {
+        match = false;
+      }
     }
 
-    // Filtrado de puestos
+    // Filtro por puestos
     if (puestosFiltro.length > 0) {
-      match = match && puestosFiltro.some(p => c.puestos.includes(p));
+      const tienePuesto = puestosFiltro.some(p => c.puestos.includes(p));
+      if (!tienePuesto) match = false;
     }
 
     return match;
@@ -89,7 +105,8 @@ document.getElementById("buscarCandidatos")?.addEventListener("click", e => {
   } else {
     resultado.forEach(c => {
       const li = document.createElement("li");
-      li.textContent = `${c.nombre} – ${c.puestos.join(", ")} – ${c.provincia}, ${c.ayuntamiento} – ${c.distancia}`;
+      // Mostramos también el nombre del CV
+      li.textContent = `${c.nombre} – ${c.puestos.join(", ")} – ${c.provincia}, ${c.ayuntamiento} – ${c.distancia} – CV: ${c.cv}`;
       ul.appendChild(li);
     });
   }
