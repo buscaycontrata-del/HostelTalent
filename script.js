@@ -5,7 +5,7 @@ function guardarEnStorage(clave, datos) {
   localStorage.setItem(clave, JSON.stringify(datos));
 }
 
-function cargarDeStorage(clave) {
+function cargarDeStorage(clave, datos) {
   const datos = localStorage.getItem(clave);
   return datos ? JSON.parse(datos) : [];
 }
@@ -129,7 +129,7 @@ document.getElementById("loginEmpresa").addEventListener("submit", function(e) {
 });
 
 // ===============
-// BÚSQUEDA DE CANDIDATOS (VERSÍON FINAL)
+// BÚSQUEDA DE CANDIDATOS (CORREGIDA)
 // ===============
 document.getElementById("buscarCandidatos").addEventListener("click", function(e) {
   e.preventDefault();
@@ -141,19 +141,6 @@ document.getElementById("buscarCandidatos").addEventListener("click", function(e
   const puestosFiltro = Array.from(
     document.querySelectorAll("#filtroPuestos option:checked")
   ).map(opt => opt.value);
-
-  // Convertir distancia a número
-  const parseKm = (dist) => {
-    if (dist === "Sin límite") return Infinity;
-    if (dist === "Local") return 0;
-    if (dist === "10 km") return 10;
-    if (dist === "20 km") return 20;
-    if (dist === "30 km") return 30;
-    if (dist === "50 km") return 50;
-    return Infinity;
-  };
-
-  const kmBusqueda = parseKm(distanciaFiltro);
 
   const resultados = candidatos.filter(c => {
     // 1. Provincia
@@ -169,14 +156,25 @@ document.getElementById("buscarCandidatos").addEventListener("click", function(e
     const d = getDistancia(ayuntamientoFiltro, c.ayuntamiento);
     if (d === Infinity) return false;
 
-    // 5. El candidato debe aceptar la distancia real
+    // 5. Si la búsqueda es "Local", mostrar todos los del mismo ayuntamiento
+    if (distanciaFiltro === "Local") {
+      return d === 0;
+    }
+
+    // 6. Para otras distancias, usar los radios
+    const parseKm = (dist) => {
+      if (dist === "Sin límite") return Infinity;
+      if (dist === "10 km") return 10;
+      if (dist === "20 km") return 20;
+      if (dist === "30 km") return 30;
+      if (dist === "50 km") return 50;
+      return Infinity;
+    };
+
     const kmCandidato = parseKm(c.distancia);
-    if (d > kmCandidato) return false;
+    const kmBusqueda = parseKm(distanciaFiltro);
 
-    // 6. La empresa también debe cubrir la distancia real (si puso límite)
-    if (kmBusqueda !== Infinity && d > kmBusqueda) return false;
-
-    return true;
+    return d <= kmCandidato && d <= kmBusqueda;
   });
 
   const ul = document.getElementById("resultadoBusqueda");
