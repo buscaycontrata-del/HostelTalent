@@ -109,12 +109,11 @@ document.getElementById("loginEmpresa").addEventListener("submit", function(e) {
 });
 
 // ===============
-// BÚSQUEDA DE CANDIDATOS
+// BÚSQUEDA DE CANDIDATOS (sin búsqueda libre)
 // ===============
 document.getElementById("buscarCandidatos").addEventListener("click", function(e) {
   e.preventDefault();
 
-  const texto = (document.getElementById("busquedaTexto")?.value || "").toLowerCase().trim();
   const provincia = (document.getElementById("filtroProvincia")?.value || "").trim();
   const ayuntamiento = (document.getElementById("filtroAyuntamiento")?.value || "").trim();
   const distanciaFiltro = (document.getElementById("filtroDistancia")?.value || "").trim();
@@ -124,14 +123,6 @@ document.getElementById("buscarCandidatos").addEventListener("click", function(e
   ).map(opt => opt.value);
 
   const resultados = candidatos.filter(c => {
-    if (texto) {
-      const coincide = 
-        c.nombre.toLowerCase().includes(texto) ||
-        c.ayuntamiento.toLowerCase().includes(texto) ||
-        c.puestos.some(p => p.toLowerCase().includes(texto));
-      if (!coincide) return false;
-    }
-
     if (provincia && c.provincia !== provincia) return false;
     if (ayuntamiento && c.ayuntamiento !== ayuntamiento) return false;
 
