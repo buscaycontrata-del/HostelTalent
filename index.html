@@ -107,19 +107,17 @@
     }
 
     form input,
-    form select,
-    form button {
+    form select {
       padding: 12px 16px;
       font-size: 15px;
       border: 1px solid #ced4da;
       border-radius: 12px;
     }
 
-    /* Botones de acción - tamaño reducido */
+    /* Botones "Enviar candidatura", "Volver", "Entrar" */
     form button[type="submit"],
     .btn-volver,
-    #buscarCandidatos,
-    #nuevaBusquedaBtn {
+    #loginEmpresa button[type="submit"] {
       background: #d6e7f5;
       color: #2c3e50;
       border: none;
@@ -130,12 +128,14 @@
       box-shadow: 0 4px 8px rgba(0,0,0,0.08);
       font-size: 14px;
       transition: all 0.3s;
+      width: 100%;
+      max-width: 100%;
+      text-align: center;
     }
 
     form button[type="submit"]:hover,
     .btn-volver:hover,
-    #buscarCandidatos:hover,
-    #nuevaBusquedaBtn:hover {
+    #loginEmpresa button[type="submit"]:hover {
       transform: translateY(-2px);
       box-shadow: 0 6px 12px rgba(0,0,0,0.12);
     }
