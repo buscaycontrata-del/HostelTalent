@@ -25,11 +25,8 @@ const distancias = {
   "Soutomaior": { "Vigo": 20, "Cangas": 32, "Moaña": 25, "Bueu": 28, "Nigrán": 30, "Oia": 55, "Redondela": 8, "Pontevedra": 11, "Soutomaior": 0 }
 };
 
-// Devuelve la distancia entre dos ayuntamientos
 function getDistancia(ay1, ay2) {
-  if (!distancias[ay1] || !distancias[ay1][ay2]) {
-    return Infinity;
-  }
+  if (!distancias[ay1] || !distancias[ay1][ay2]) return Infinity;
   return distancias[ay1][ay2];
 }
 
@@ -108,7 +105,7 @@ document.getElementById("formEmpresa").addEventListener("submit", function(e) {
 });
 
 // ===============
-// LOGIN EMPRESA (por EMAIL)
+// LOGIN EMPRESA
 // ===============
 document.getElementById("loginEmpresa").addEventListener("submit", function(e) {
   e.preventDefault();
@@ -145,42 +142,44 @@ document.getElementById("buscarCandidatos").addEventListener("click", function(e
     document.querySelectorAll("#filtroPuestos option:checked")
   ).map(opt => opt.value);
 
+  // Convertir distancia de búsqueda a km (número)
+  let kmBusqueda = Infinity;
+  if (distanciaFiltro === "Local") kmBusqueda = 0;
+  else if (distanciaFiltro === "10 km") kmBusqueda = 10;
+  else if (distanciaFiltro === "20 km") kmBusqueda = 20;
+  else if (distanciaFiltro === "30 km") kmBusqueda = 30;
+  else if (distanciaFiltro === "50 km") kmBusqueda = 50;
+  // "Sin límite" → kmBusqueda = Infinity
+
   const resultados = candidatos.filter(c => {
-    // 1. Filtro por provincia
+    // 1. Provincia
     if (provinciaFiltro && c.provincia !== provinciaFiltro) return false;
 
-    // 2. Filtro por puesto
-    if (puestosFiltro.length > 0) {
-      if (!puestosFiltro.some(p => c.puestos.includes(p))) return false;
-    }
+    // 2. Puesto
+    if (puestosFiltro.length > 0 && !puestosFiltro.some(p => c.puestos.includes(p))) return false;
 
-    // 3. Si no se pone ayuntamiento, no filtramos por ubicación
+    // 3. Si no hay ayuntamiento, pasar
     if (!ayuntamientoFiltro) return true;
 
-    // 4. Calcular distancia real
+    // 4. Distancia real entre ayuntamientos
     const d = getDistancia(ayuntamientoFiltro, c.ayuntamiento);
 
-    // 5. Si el candidato puso "Sin límite", siempre pasa
+    // 5. Si candidato puso "Sin límite", pasa siempre
     if (c.distancia === "Sin límite") return true;
 
-    // 6. Si el candidato puso "Local", solo si es el mismo ayuntamiento
-    if (c.distancia === "Local") {
-      return d === 0;
-    }
+    // 6. Si candidato puso "Local", solo si es el mismo
+    if (c.distancia === "Local") return d === 0;
 
-    // 7. Convertir distancias a números
-    const kmCandidato = c.distancia === "10 km" ? 10 :
-                        c.distancia === "20 km" ? 20 :
-                        c.distancia === "30 km" ? 30 :
-                        c.distancia === "50 km" ? 50 : Infinity;
+    // 7. Convertir distancia del candidato a número
+    let kmCandidato = Infinity;
+    if (c.distancia === "10 km") kmCandidato = 10;
+    else if (c.distancia === "20 km") kmCandidato = 20;
+    else if (c.distancia === "30 km") kmCandidato = 30;
+    else if (c.distancia === "50 km") kmCandidato = 50;
 
-    const kmBusqueda = distanciaFiltro === "10 km" ? 10 :
-                       distanciaFiltro === "20 km" ? 20 :
-                       distanciaFiltro === "30 km" ? 30 :
-                       distanciaFiltro === "50 km" ? 50 :
-                       distanciaFiltro === "Local" ? 0 : Infinity;
-
-    // 8. El candidato debe estar dentro de SU radio Y del radio de búsqueda
+    // 8. Aparece si: 
+    //    - está dentro del radio del candidato (d <= kmCandidato)
+    //    - y dentro del radio de búsqueda (d <= kmBusqueda)
     return d <= kmCandidato && d <= kmBusqueda;
   });
 
