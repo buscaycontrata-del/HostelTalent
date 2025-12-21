@@ -449,10 +449,10 @@
     document.getElementById("seccionEntrar").style.display = "block";
   };
 
-  // FILTRO DINÁMICO EN EL BUSCADOR DE PUESTOS (solo en formulario de candidato)
+  // 🔹 NUEVO: Buscador dinámico en el formulario de candidatos
   document.getElementById("puestosBuscador").addEventListener("input", function() {
     const filtro = this.value.toLowerCase();
-    const labels = document.querySelectorAll("#puestosContainer label");
+    const labels = this.parentElement.querySelectorAll("label:not(:first-child)");
     labels.forEach(label => {
       const texto = label.textContent.toLowerCase();
       label.style.display = texto.includes(filtro) ? "block" : "none";
