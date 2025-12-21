@@ -11,7 +11,7 @@ function cargarDeStorage(clave) {
 }
 
 // ===============
-// TABLA DE DISTANCIAS ENTRE AYUNTAMIENTOS (en km)
+// TABLA DE DISTANCIAS
 // ===============
 const distancias = {
   "Vigo": { "Vigo": 0, "Cangas": 29, "Moaña": 19, "Bueu": 29, "Nigrán": 15, "Oia": 50, "Redondela": 14, "Pontevedra": 28, "Soutomaior": 20 },
@@ -142,14 +142,18 @@ document.getElementById("buscarCandidatos").addEventListener("click", function(e
     document.querySelectorAll("#filtroPuestos option:checked")
   ).map(opt => opt.value);
 
-  // Convertir distancia de búsqueda a km (número)
-  let kmBusqueda = Infinity;
-  if (distanciaFiltro === "Local") kmBusqueda = 0;
-  else if (distanciaFiltro === "10 km") kmBusqueda = 10;
-  else if (distanciaFiltro === "20 km") kmBusqueda = 20;
-  else if (distanciaFiltro === "30 km") kmBusqueda = 30;
-  else if (distanciaFiltro === "50 km") kmBusqueda = 50;
-  // "Sin límite" → kmBusqueda = Infinity
+  // Convertir la distancia de búsqueda a km
+  function parseDistancia(dist) {
+    if (dist === "Sin límite") return Infinity;
+    if (dist === "Local") return 0;
+    if (dist === "10 km") return 10;
+    if (dist === "20 km") return 20;
+    if (dist === "30 km") return 30;
+    if (dist === "50 km") return 50;
+    return Infinity;
+  }
+
+  const kmBusqueda = parseDistancia(distanciaFiltro);
 
   const resultados = candidatos.filter(c => {
     // 1. Provincia
@@ -161,25 +165,16 @@ document.getElementById("buscarCandidatos").addEventListener("click", function(e
     // 3. Si no hay ayuntamiento, pasar
     if (!ayuntamientoFiltro) return true;
 
-    // 4. Distancia real entre ayuntamientos
+    // 4. Distancia real
     const d = getDistancia(ayuntamientoFiltro, c.ayuntamiento);
+    if (d === Infinity) return false;
 
-    // 5. Si candidato puso "Sin límite", pasa siempre
-    if (c.distancia === "Sin límite") return true;
+    // 5. Distancia del candidato
+    const kmCandidato = parseDistancia(c.distancia);
 
-    // 6. Si candidato puso "Local", solo si es el mismo
-    if (c.distancia === "Local") return d === 0;
-
-    // 7. Convertir distancia del candidato a número
-    let kmCandidato = Infinity;
-    if (c.distancia === "10 km") kmCandidato = 10;
-    else if (c.distancia === "20 km") kmCandidato = 20;
-    else if (c.distancia === "30 km") kmCandidato = 30;
-    else if (c.distancia === "50 km") kmCandidato = 50;
-
-    // 8. Aparece si: 
-    //    - está dentro del radio del candidato (d <= kmCandidato)
-    //    - y dentro del radio de búsqueda (d <= kmBusqueda)
+    // 6. Aparece si:
+    //    - La distancia real está dentro del radio del candidato (d <= kmCandidato)
+    //    - Y la distancia real está dentro del radio de búsqueda (d <= kmBusqueda)
     return d <= kmCandidato && d <= kmBusqueda;
   });
 
