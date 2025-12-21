@@ -114,30 +114,36 @@
       border-radius: 12px;
     }
 
-    /* Botones "Enviar candidatura", "Volver", "Entrar" */
-    form button[type="submit"],
-    .btn-volver,
-    #loginEmpresa button[type="submit"] {
-      background: #d6e7f5;
-      color: #2c3e50;
-      border: none;
-      font-weight: 600;
-      cursor: pointer;
-      border-radius: 50px;
-      padding: 10px 20px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.08);
-      font-size: 14px;
-      transition: all 0.3s;
-      width: 100%;
-      max-width: 100%;
-      text-align: center;
+    /* Estilo específico para los botones visibles */
+    #formCandidato button[type="submit"],
+    #formCandidato .btn-volver,
+    #formEmpresa button[type="submit"],
+    #formEmpresa .btn-volver,
+    #loginEmpresa button[type="submit"],
+    #loginEmpresa .btn-volver {
+      background: #d6e7f5 !important;
+      color: #2c3e50 !important;
+      border: none !important;
+      font-weight: 600 !important;
+      cursor: pointer !important;
+      border-radius: 50px !important;
+      padding: 10px 20px !important;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.08) !important;
+      font-size: 14px !important;
+      transition: all 0.3s !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      text-align: center !important;
     }
 
-    form button[type="submit"]:hover,
-    .btn-volver:hover,
-    #loginEmpresa button[type="submit"]:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 12px rgba(0,0,0,0.12);
+    #formCandidato button[type="submit"]:hover,
+    #formCandidato .btn-volver:hover,
+    #formEmpresa button[type="submit"]:hover,
+    #formEmpresa .btn-volver:hover,
+    #loginEmpresa button[type="submit"]:hover,
+    #loginEmpresa .btn-volver:hover {
+      transform: translateY(-2px) !important;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.12) !important;
     }
 
     label {
