@@ -220,6 +220,19 @@
       font-size: 14px;
     }
 
+    /* Logo */
+    .logo-container {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .logo-container img {
+      max-width: 300px;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+
     /* Ajustes generales */
     @media (max-width: 768px) {
       .menu-principal button {
@@ -229,10 +242,18 @@
       section {
         padding: 16px;
       }
+      .logo-container img {
+        max-width: 250px;
+      }
     }
   </style>
 </head>
 <body>
+
+<!-- Logo -->
+<div class="logo-container">
+  <img src="https://i.imgur.com/5JzYQKg.png" alt="HostelTalent - Conectando Profesionales">
+</div>
 
 <h2>HostelTalent - Formularios</h2>
 
@@ -449,7 +470,7 @@
     document.getElementById("seccionEntrar").style.display = "block";
   };
 
-  // 🔹 NUEVO: Buscador dinámico en el formulario de candidatos
+  // 🔹 Buscador dinámico en el formulario de candidatos
   document.getElementById("puestosBuscador").addEventListener("input", function() {
     const filtro = this.value.toLowerCase();
     const labels = this.parentElement.querySelectorAll("label:not(:first-child)");
