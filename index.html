@@ -337,7 +337,7 @@
     <button type="submit">Entrar</button>
     <button type="button" class="btn-volver" onclick="volverPrincipal()">Volver</button>
   </form>
-  <div id="busquedaCandidatos" style="display:none; margin-top:20px;">
+  <div id="busquedaCandidatos" style="display:none; margin-top:8px;">
     <h4 style="margin-bottom: 8px;">Buscar Candidatos</h4>
     <label>Provincia</label>
     <input list="provincias" id="filtroProvincia" placeholder="Provincia">
@@ -354,7 +354,10 @@
       <option>Sin límite</option>
     </select>
     <label>Puesto</label>
-    <select multiple size="8" id="filtroPuestos">
+    <!-- Buscador independiente -->
+    <input type="text" id="filtroPuestosBuscador" placeholder="Buscar puesto..." style="width: 100%; margin-bottom: 8px;">
+    <!-- Desplegable que se abre al pinchar -->
+    <select multiple size="1" id="filtroPuestos" style="width: 100%; height: auto; overflow: hidden;">
       <option value="Camarero/a sala">Camarero/a sala</option>
       <option value="Cocinero/a">Cocinero/a</option>
       <option value="Agente de reservas">Agente de reservas</option>
@@ -498,6 +501,26 @@
     document.getElementById("paginaPrincipal").style.display = "none";
     document.getElementById("seccionEntrar").style.display = "block";
   };
+
+  // Filtrar puestos en tiempo real
+  document.getElementById("filtroPuestosBuscador").addEventListener("input", function() {
+    const filtro = this.value.toLowerCase();
+    const options = document.querySelectorAll("#filtroPuestos option");
+    options.forEach(opt => {
+      const texto = opt.textContent.toLowerCase();
+      opt.style.display = texto.includes(filtro) ? "block" : "none";
+    });
+  });
+
+  // Hacer que el desplegable se abra al pinchar
+  document.getElementById("filtroPuestos").addEventListener("click", function() {
+    this.size = this.options.length > 8 ? 8 : this.options.length;
+  });
+
+  // Cerrar al perder foco
+  document.getElementById("filtroPuestos").addEventListener("blur", function() {
+    this.size = 1;
+  });
 </script>
 
 <footer>
