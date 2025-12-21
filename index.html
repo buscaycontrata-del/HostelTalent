@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <title>HostelTalent - Formularios</title>
   <style>
-    /* Reset y tipografía */
     * {
       box-sizing: border-box;
       margin: 0;
@@ -12,7 +11,6 @@
       font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
     }
 
-    /* Fondo más oscuro */
     body {
       background: #d6e7f5;
       padding: 24px;
@@ -22,7 +20,6 @@
       overflow-x: hidden;
     }
 
-    /* Formas abstractas de fondo (solo decorativas) */
     body::before {
       content: "";
       position: absolute;
@@ -47,7 +44,6 @@
       z-index: -1;
     }
 
-    /* Títulos destacados */
     h2 {
       text-align: center;
       margin-bottom: 28px;
@@ -62,23 +58,48 @@
       font-weight: 600;
     }
 
-    /* Contenedores modernos */
     section {
       background: #ffffff;
       padding: 24px;
       margin-bottom: 28px;
       border-radius: 16px;
       box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+      display: none; /* oculto por defecto */
+    }
+
+    .menu-principal {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 32px;
+      padding: 20px 0;
+      position: sticky;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      background: transparent;
+    }
+
+    .menu-principal button {
+      padding: 12px 24px;
+      font-size: 15px;
+      font-weight: 600;
       border: none;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s;
+      min-width: 160px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+      background: #d6e7f5;
+      color: #2c3e50;
     }
 
-    section:hover {
+    .menu-principal button:hover {
       transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.12);
     }
 
-    /* Formularios */
     form {
       display: flex;
       flex-direction: column;
@@ -92,17 +113,8 @@
       font-size: 15px;
       border: 1px solid #ced4da;
       border-radius: 12px;
-      transition: all 0.2s;
     }
 
-    form input:focus,
-    form select:focus {
-      outline: none;
-      border-color: #3498db;
-      box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.15);
-    }
-
-    /* Botones del formulario (¡NO CAMBIAN!) */
     form button {
       background: #2c3e50;
       color: white;
@@ -110,15 +122,8 @@
       font-weight: 600;
       cursor: pointer;
       border-radius: 12px;
-      transition: background 0.3s;
     }
 
-    form button:hover {
-      background: #1a252f;
-      transform: translateY(-1px);
-    }
-
-    /* Labels */
     label {
       font-weight: 600;
       margin-top: 8px;
@@ -127,7 +132,6 @@
       font-size: 15px;
     }
 
-    /* Resultados */
     #resultadoBusqueda {
       list-style: none;
       padding-left: 0;
@@ -141,44 +145,8 @@
       margin-bottom: 10px;
       border-left: 4px solid #3498db;
       font-size: 15px;
-      word-break: break-word;
     }
 
-    /* Menú principal (botones en la parte de abajo) */
-    .menu-principal {
-      display: flex;
-      justify-content: center;
-      gap: 16px;
-      margin-top: 32px;
-      padding: 20px 0;
-      position: sticky;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      z-index: 1000;
-      background: transparent; /* Sin fondo blanco */
-    }
-
-    .menu-principal button {
-      padding: 12px 24px;
-      font-size: 15px;
-      font-weight: 600;
-      border: none;
-      border-radius: 50px;
-      cursor: pointer;
-      transition: all 0.3s;
-      min-width: 160px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.08);
-      background: #d6e7f5; /* MISMO COLOR QUE EL FONDO */
-      color: #2c3e50; /* Color de texto oscuro para contraste */
-    }
-
-    .menu-principal button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 12px rgba(0,0,0,0.12);
-    }
-
-    /* Puestos */
     #puestosContainer {
       border: 1px solid #e9ecef;
       border-radius: 12px;
@@ -205,7 +173,6 @@
       font-size: 14px;
     }
 
-    /* Logo */
     .logo-container {
       text-align: center;
       margin-bottom: 24px;
@@ -218,7 +185,6 @@
       box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
     }
 
-    /* Footer */
     footer {
       text-align: center;
       padding: 20px 0;
@@ -228,60 +194,41 @@
       margin-top: 24px;
     }
 
-    /* Responsive */
     @media (max-width: 768px) {
-      .menu-principal {
-        flex-wrap: wrap;
-        padding: 16px;
-        margin-top: 24px;
-      }
-
       .menu-principal button {
         min-width: auto;
         flex: 1 1 100%;
         padding: 12px;
-      }
-
-      section {
-        padding: 20px;
-      }
-
-      .logo-container img {
-        max-width: 240px;
       }
     }
   </style>
 </head>
 <body>
 
-<!-- Logo -->
-<div class="logo-container">
-  <img src="https://github.com/buscaycontrata-del/HostelTalent/raw/main/Logo_para_APP_sin_fondo-.png" alt="HostelTalent - Conectando Profesionales">
+<!-- Contenedor principal -->
+<div id="paginaPrincipal">
+  <div class="logo-container">
+    <img src="https://github.com/buscaycontrata-del/HostelTalent/raw/main/Logo_para_APP_sin_fondo-.png" alt="HostelTalent">
+  </div>
+  <h2>HostelTalent - Formularios</h2>
+  <div class="menu-principal">
+    <button id="btnCandidatos">Alta de candidatos/as</button>
+    <button id="btnEmpresas">Alta de empresas</button>
+    <button id="btnEntrar">Entrar (empresas autorizadas)</button>
+  </div>
 </div>
 
-<h2>HostelTalent - Formularios</h2>
-
-<!-- Menú principal (botones en la parte de abajo) -->
-<div class="menu-principal">
-  <button id="btnCandidatos">Alta de candidatos/as</button>
-  <button id="btnEmpresas">Alta de empresas</button>
-  <button id="btnEntrar">Entrar (empresas autorizadas)</button>
-</div>
-
-<!-- Formulario de candidatos -->
-<section id="seccionCandidatos" style="display:none;">
+<!-- Formularios (ocultos al inicio) -->
+<section id="seccionCandidatos">
   <h3>Formulario para Candidatos</h3>
   <form id="formCandidato">
     <input type="text" id="nombre" placeholder="Nombre y Apellidos" required>
     <input type="email" id="email" placeholder="Email" required>
     <input type="tel" id="telefono" placeholder="Teléfono" required>
-
     <label>Provincia</label>
     <input list="provincias" id="provincia" placeholder="Buscar provincia" required>
-
     <label>Ayuntamiento</label>
     <input list="ayuntamientos" id="ayuntamiento" placeholder="Buscar ayuntamiento" required>
-
     <label>Distancia máxima</label>
     <select id="distancia" required>
       <option value="">Selecciona</option>
@@ -292,7 +239,6 @@
       <option>50 km</option>
       <option>Sin límite</option>
     </select>
-
     <label>Puestos (marca los que apliquen)</label>
     <div id="puestosContainer">
       <input type="text" id="puestosBuscador" placeholder="Buscar puesto...">
@@ -334,16 +280,13 @@
       <label><input type="checkbox" value="Segundo/a de cocina"> Segundo/a de cocina</label>
       <label><input type="checkbox" value="Sumiller"> Sumiller</label>
     </div>
-
     <label>Subir CV (PDF)</label>
     <input type="file" id="cv" accept="application/pdf">
-
     <button type="submit">Enviar candidatura</button>
   </form>
 </section>
 
-<!-- Formulario de empresas -->
-<section id="seccionEmpresas" style="display:none;">
+<section id="seccionEmpresas">
   <h3>Formulario para Empresas</h3>
   <form id="formEmpresa">
     <input type="text" id="nombreComercial" placeholder="Nombre comercial" required>
@@ -352,35 +295,27 @@
     <input type="email" id="emailEmpresa" placeholder="Email de la empresa" required>
     <input type="tel" id="telefonoEmpresa" placeholder="Teléfono" required>
     <input type="text" id="personaContacto" placeholder="Persona de contacto" required>
-
     <label>Provincia del establecimiento</label>
     <input list="provincias" id="provinciaEmpresa" placeholder="Buscar provincia" required>
-
     <label>Ayuntamiento del establecimiento</label>
     <input list="ayuntamientos" id="ayuntamientoEmpresa" placeholder="Buscar ayuntamiento" required>
-
     <button type="submit">Enviar datos de la empresa</button>
   </form>
 </section>
 
-<!-- Acceso y búsqueda de empresas autorizadas -->
-<section id="seccionEntrar" style="display:none;">
+<section id="seccionEntrar">
   <h3>Acceso Empresas Autorizadas</h3>
   <form id="loginEmpresa">
     <input type="email" id="emailLogin" placeholder="Email de la empresa" required>
     <input type="password" id="loginPassword" placeholder="Contraseña" required>
     <button type="submit">Entrar</button>
   </form>
-
   <div id="busquedaCandidatos" style="display:none; margin-top:20px;">
     <h4>Buscar Candidatos</h4>
-
     <label>Provincia</label>
     <input list="provincias" id="filtroProvincia" placeholder="Provincia">
-
     <label>Ayuntamiento</label>
     <input list="ayuntamientos" id="filtroAyuntamiento" placeholder="Ayuntamiento">
-
     <label>Radio de distancia</label>
     <select id="filtroDistancia">
       <option value="">Cualquiera</option>
@@ -391,7 +326,6 @@
       <option>50 km</option>
       <option>Sin límite</option>
     </select>
-
     <label>Puesto</label>
     <select multiple size="8" id="filtroPuestos">
       <option value="Camarero/a sala">Camarero/a sala</option>
@@ -432,7 +366,6 @@
       <option value="Segundo/a de cocina">Segundo/a de cocina</option>
       <option value="Sumiller">Sumiller</option>
     </select>
-
     <button id="buscarCandidatos">Buscar</button>
     <ul id="resultadoBusqueda" style="margin-top:10px;"></ul>
   </div>
@@ -457,34 +390,24 @@
 
 <script src="script.js"></script>
 <script>
-  // Mostrar/ocultar secciones
-  document.getElementById("btnCandidatos").onclick = () => {
-    document.getElementById("seccionCandidatos").style.display = "block";
+  // Mostrar/ocultar secciones y esconder la página principal
+  function mostrarSeccion(id) {
+    document.getElementById("paginaPrincipal").style.display = "none";
+    document.getElementById("seccionCandidatos").style.display = "none";
     document.getElementById("seccionEmpresas").style.display = "none";
     document.getElementById("seccionEntrar").style.display = "none";
+    document.getElementById(id).style.display = "block";
+  }
+
+  document.getElementById("btnCandidatos").onclick = () => {
+    mostrarSeccion("seccionCandidatos");
   };
   document.getElementById("btnEmpresas").onclick = () => {
-    document.getElementById("seccionCandidatos").style.display = "none";
-    document.getElementById("seccionEmpresas").style.display = "block";
-    document.getElementById("seccionEntrar").style.display = "none";
+    mostrarSeccion("seccionEmpresas");
   };
   document.getElementById("btnEntrar").onclick = () => {
-    document.getElementById("seccionCandidatos").style.display = "none";
-    document.getElementById("seccionEmpresas").style.display = "none";
-    document.getElementById("seccionEntrar").style.display = "block";
+    mostrarSeccion("seccionEntrar");
   };
-
-  // 🔹 Buscador dinámico en el formulario de candidatos (CORREGIDO)
-  document.getElementById("puestosBuscador").addEventListener("input", function() {
-    const filtro = this.value.toLowerCase().trim();
-    const labels = document.querySelectorAll("#puestosContainer label");
-    labels.forEach(label => {
-      // Saltar el primer label (es el del buscador)
-      if (label.querySelector("#puestosBuscador")) return;
-      const texto = label.textContent.toLowerCase();
-      label.style.display = texto.includes(filtro) ? "block" : "none";
-    });
-  });
 </script>
 
 <footer>
