@@ -354,54 +354,54 @@
       <option>Sin límite</option>
     </select>
     <label>Puesto</label>
-    <!-- Buscador independiente -->
-    <input type="text" id="filtroPuestosBuscador" placeholder="Buscar puesto..." style="width: 100%; margin-bottom: 8px;">
-    <!-- Desplegable que se abre al pinchar -->
-    <select multiple size="1" id="filtroPuestos" style="width: 100%; height: auto; overflow: hidden;">
-      <option value="Camarero/a sala">Camarero/a sala</option>
-      <option value="Cocinero/a">Cocinero/a</option>
-      <option value="Agente de reservas">Agente de reservas</option>
-      <option value="Animador/a turístico/a">Animador/a turístico/a</option>
-      <option value="Auxiliar de cocina">Auxiliar de cocina</option>
-      <option value="Ayudante de camarero/a"> Ayudante de camarero/a</option>
-      <option value="Ayudante de cocina">Ayudante de cocina</option>
-      <option value="Barista">Barista</option>
-      <option value="Barman">Barman</option>
-      <option value="Bartender">Bartender</option>
-      <option value="Botones / maletero">Botones / maletero</option>
-      <option value="Camarero/a de pisos">Camarero/a de pisos</option>
-      <option value="Chef ejecutivo/a">Chef ejecutivo/a</option>
-      <option value="Comercial de hotel / comercial B2B">Comercial de hotel / comercial B2B</option>
-      <option value="Conserje">Conserje</option>
-      <option value="Director/a de alimentos y bebidas (F&B manager)">Director/a de alimentos y bebidas (F&B manager)</option>
-      <option value="Director/a de hotel">Director/a de hotel</option>
-      <option value="Director/a de restaurante">Director/a de restaurante</option>
-      <option value="Event manager / responsable de eventos">Event manager / responsable de eventos</option>
-      <option value="Friegaplatos / platero / steward">Friegaplatos / platero / steward</option>
-      <option value="Gobernanta/e de hotel">Gobernanta/e de hotel</option>
-      <option value="Jefe/a de cocina">Jefe/a de cocina</option>
-      <option value="Jefe/a de operaciones / controller de operaciones">Jefe/a de operaciones / controller de operaciones</option>
-      <option value="Jefe/a de partida">Jefe/a de partida</option>
-      <option value="Jefe/a de recepción">Jefe/a de recepción</option>
-      <option value="Maître / jefe/a de sala">Maître / jefe/a de sala</option>
-      <option value="Panadero/a">Panadero/a</option>
-      <option value="Pastelero/a / repostero/a">Pastelero/a / repostero/a</option>
-      <option value="Personal administrativo / contable">Personal administrativo / contable</option>
-      <option value="Personal de lavandería">Personal de lavandería</option>
-      <option value="Personal de mantenimiento">Personal de mantenimiento</option>
-      <option value="Personal de room service / servicio de habitaciones">Personal de room service / servicio de habitaciones</option>
-      <option value="Recepcionista de hotel">Recepcionista de hotel</option>
-      <option value="Responsable de marketing y comunicación">Responsable de marketing y comunicación</option>
-      <option value="Responsable de RRHH en hostelería">Responsable de RRHH en hostelería</option>
-      <option value="Segundo/a de cocina">Segundo/a de cocina</option>
-      <option value="Sumiller">Sumiller</option>
-    </select>
+    <!-- Buscador de puestos (fuera del contenedor) -->
+    <input type="text" id="filtroPuestosBuscador" placeholder="Buscar puesto..." style="width: 100%; padding: 6px 8px; border: 1px solid #dfe3e8; border-radius: 4px; margin-bottom: 8px; font-size: 14px;">
+    <!-- Contenedor de puestos con checkboxes -->
+    <div id="filtroPuestosContainer" style="border: 1px solid #e9ecef; border-radius: 8px; padding: 8px; max-height: 160px; overflow-y: auto; background: #fafbfc;">
+      <label><input type="checkbox" value="Camarero/a sala"> Camarero/a sala</label>
+      <label><input type="checkbox" value="Cocinero/a"> Cocinero/a</label>
+      <label><input type="checkbox" value="Agente de reservas"> Agente de reservas</label>
+      <label><input type="checkbox" value="Animador/a turístico/a"> Animador/a turístico/a</label>
+      <label><input type="checkbox" value="Auxiliar de cocina"> Auxiliar de cocina</label>
+      <label><input type="checkbox" value="Ayudante de camarero/a"> Ayudante de camarero/a</label>
+      <label><input type="checkbox" value="Ayudante de cocina"> Ayudante de cocina</label>
+      <label><input type="checkbox" value="Barista"> Barista</label>
+      <label><input type="checkbox" value="Barman"> Barman</label>
+      <label><input type="checkbox" value="Bartender"> Bartender</label>
+      <label><input type="checkbox" value="Botones / maletero"> Botones / maletero</label>
+      <label><input type="checkbox" value="Camarero/a de pisos"> Camarero/a de pisos</label>
+      <label><input type="checkbox" value="Chef ejecutivo/a"> Chef ejecutivo/a</label>
+      <label><input type="checkbox" value="Comercial de hotel / comercial B2B"> Comercial de hotel / comercial B2B</label>
+      <label><input type="checkbox" value="Conserje"> Conserje</label>
+      <label><input type="checkbox" value="Director/a de alimentos y bebidas (F&B manager)"> Director/a de alimentos y bebidas (F&B manager)</label>
+      <label><input type="checkbox" value="Director/a de hotel"> Director/a de hotel</label>
+      <label><input type="checkbox" value="Director/a de restaurante"> Director/a de restaurante</label>
+      <label><input type="checkbox" value="Event manager / responsable de eventos"> Event manager / responsable de eventos</label>
+      <label><input type="checkbox" value="Friegaplatos / platero / steward"> Friegaplatos / platero / steward</label>
+      <label><input type="checkbox" value="Gobernanta/e de hotel"> Gobernanta/e de hotel</label>
+      <label><input type="checkbox" value="Jefe/a de cocina"> Jefe/a de cocina</label>
+      <label><input type="checkbox" value="Jefe/a de operaciones / controller de operaciones"> Jefe/a de operaciones / controller de operaciones</label>
+      <label><input type="checkbox" value="Jefe/a de partida"> Jefe/a de partida</label>
+      <label><input type="checkbox" value="Jefe/a de recepción"> Jefe/a de recepción</label>
+      <label><input type="checkbox" value="Maître / jefe/a de sala"> Maître / jefe/a de sala</label>
+      <label><input type="checkbox" value="Panadero/a"> Panadero/a</label>
+      <label><input type="checkbox" value="Pastelero/a / repostero/a"> Pastelero/a / repostero/a</label>
+      <label><input type="checkbox" value="Personal administrativo / contable"> Personal administrativo / contable</label>
+      <label><input type="checkbox" value="Personal de lavandería"> Personal de lavandería</label>
+      <label><input type="checkbox" value="Personal de mantenimiento"> Personal de mantenimiento</label>
+      <label><input type="checkbox" value="Personal de room service / servicio de habitaciones"> Personal de room service / servicio de habitaciones</label>
+      <label><input type="checkbox" value="Recepcionista de hotel"> Recepcionista de hotel</label>
+      <label><input type="checkbox" value="Responsable de marketing y comunicación"> Responsable de marketing y comunicación</label>
+      <label><input type="checkbox" value="Responsable de RRHH en hostelería"> Responsable de RRHH en hostelería</label>
+      <label><input type="checkbox" value="Segundo/a de cocina"> Segundo/a de cocina</label>
+      <label><input type="checkbox" value="Sumiller"> Sumiller</label>
+    </div>
     <button id="buscarCandidatos">Buscar</button>
     <button type="button" id="nuevaBusquedaBtn" style="margin-top:12px;" onclick="
       document.getElementById('filtroProvincia').value = '';
       document.getElementById('filtroAyuntamiento').value = '';
       document.getElementById('filtroDistancia').value = '';
-      document.getElementById('filtroPuestos').querySelectorAll('option').forEach(opt => opt.selected = false);
+      document.querySelectorAll('#filtroPuestosContainer input[type=&quot;checkbox&quot;]').forEach(cb => cb.checked = false);
       document.getElementById('resultadoBusqueda').innerHTML = '';
     ">Nueva búsqueda</button>
     <ul id="resultadoBusqueda" style="margin-top:10px;"></ul>
@@ -502,24 +502,14 @@
     document.getElementById("seccionEntrar").style.display = "block";
   };
 
-  // Filtrar puestos en tiempo real
+  // Buscador de puestos en la sección de búsqueda
   document.getElementById("filtroPuestosBuscador").addEventListener("input", function() {
-    const filtro = this.value.toLowerCase();
-    const options = document.querySelectorAll("#filtroPuestos option");
-    options.forEach(opt => {
-      const texto = opt.textContent.toLowerCase();
-      opt.style.display = texto.includes(filtro) ? "block" : "none";
+    const filtro = this.value.toLowerCase().trim();
+    const labels = document.querySelectorAll("#filtroPuestosContainer label");
+    labels.forEach(label => {
+      const texto = label.textContent.toLowerCase();
+      label.style.display = texto.includes(filtro) ? "block" : "none";
     });
-  });
-
-  // Hacer que el desplegable se abra al pinchar
-  document.getElementById("filtroPuestos").addEventListener("click", function() {
-    this.size = this.options.length > 8 ? 8 : this.options.length;
-  });
-
-  // Cerrar al perder foco
-  document.getElementById("filtroPuestos").addEventListener("blur", function() {
-    this.size = 1;
   });
 </script>
 
