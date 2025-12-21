@@ -85,12 +85,12 @@ document.getElementById("formEmpresa").addEventListener("submit", function(e) {
 });
 
 // ===============
-// LOGIN EMPRESA
+// LOGIN EMPRESA (AHORA CON EMAIL)
 // ===============
 document.getElementById("loginEmpresa").addEventListener("submit", function(e) {
   e.preventDefault();
 
-  const nombreEmpresa = document.getElementById("nombreEmpresaLogin").value.trim();
+  const emailLogin = document.getElementById("emailLogin").value.trim();
   const password = document.getElementById("loginPassword").value;
 
   if (password !== "1234") {
@@ -98,15 +98,13 @@ document.getElementById("loginEmpresa").addEventListener("submit", function(e) {
     return;
   }
 
-  const empresaExiste = empresas.some(emp => 
-    emp.nombreComercial.trim().toLowerCase() === nombreEmpresa.toLowerCase()
-  );
+  const empresaExiste = empresas.some(emp => emp.email === emailLogin);
 
   if (empresaExiste) {
     document.getElementById("busquedaCandidatos").style.display = "block";
     alert("🔓 Acceso concedido.");
   } else {
-    alert("❌ Empresa no registrada. Verifica el nombre comercial exacto.");
+    alert("❌ Empresa no registrada. Usa el email registrado.");
   }
 });
 
