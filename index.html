@@ -12,9 +12,9 @@
       font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
     }
 
-    /* Fondo más oscuro y con formas abstractas */
+    /* Fondo más oscuro */
     body {
-      background: linear-gradient(135deg, #d6e7f5 0%, #cfe2f3 100%);
+      background: #d6e7f5;
       padding: 24px;
       min-height: 100vh;
       color: #212529;
@@ -102,7 +102,7 @@
       box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.15);
     }
 
-    /* Botones del formulario */
+    /* Botones del formulario (¡NO CAMBIAN!) */
     form button {
       background: #2c3e50;
       color: white;
@@ -151,14 +151,12 @@
       gap: 16px;
       margin-top: 32px;
       padding: 20px 0;
-      border-radius: 16px;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
       position: sticky;
       bottom: 0;
       left: 0;
       width: 100%;
       z-index: 1000;
-      background: transparent; /* Eliminado el rectángulo blanco */
+      background: transparent; /* Sin fondo blanco */
     }
 
     .menu-principal button {
@@ -171,8 +169,8 @@
       transition: all 0.3s;
       min-width: 160px;
       box-shadow: 0 4px 8px rgba(0,0,0,0.08);
-      background: #3498db; /* Color corporativo uniforme (igual que el fondo) */
-      color: white;
+      background: #d6e7f5; /* MISMO COLOR QUE EL FONDO */
+      color: #2c3e50; /* Color de texto oscuro para contraste */
     }
 
     .menu-principal button:hover {
@@ -180,13 +178,8 @@
       box-shadow: 0 6px 12px rgba(0,0,0,0.12);
     }
 
-    .menu-principal button#btnEmpresas {
-      background: #17a2b8;
-    }
-
-    .menu-principal button#btnEntrar {
-      background: #9b59b6;
-    }
+    /* ¡NO CAMBIO LOS COLORES INDIVIDUALES! */
+    /* Los tres botones usan el mismo color de fondo */
 
     /* Puestos */
     #puestosContainer {
