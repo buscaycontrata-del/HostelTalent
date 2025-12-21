@@ -5,7 +5,7 @@ function guardarEnStorage(clave, datos) {
   localStorage.setItem(clave, JSON.stringify(datos));
 }
 
-function cargarDeStorage(clave, datos) {
+function cargarDeStorage(clave) {
   const datos = localStorage.getItem(clave);
   return datos ? JSON.parse(datos) : [];
 }
@@ -129,7 +129,7 @@ document.getElementById("loginEmpresa").addEventListener("submit", function(e) {
 });
 
 // ===============
-// BÚSQUEDA DE CANDIDATOS (CORREGIDA)
+// BÚSQUEDA DE CANDIDATOS (LÓGICA FINAL)
 // ===============
 document.getElementById("buscarCandidatos").addEventListener("click", function(e) {
   e.preventDefault();
@@ -142,6 +142,19 @@ document.getElementById("buscarCandidatos").addEventListener("click", function(e
     document.querySelectorAll("#filtroPuestos option:checked")
   ).map(opt => opt.value);
 
+  // Convertir distancia a número
+  const parseKm = (dist) => {
+    if (!dist) return Infinity;
+    dist = dist.trim();
+    if (dist === "Sin límite") return Infinity;
+    if (dist === "Local") return 0;
+    if (dist === "10 km") return 10;
+    if (dist === "20 km") return 20;
+    if (dist === "30 km") return 30;
+    if (dist === "50 km") return 50;
+    return Infinity;
+  };
+
   const resultados = candidatos.filter(c => {
     // 1. Provincia
     if (provinciaFiltro && c.provincia !== provinciaFiltro) return false;
@@ -149,31 +162,26 @@ document.getElementById("buscarCandidatos").addEventListener("click", function(e
     // 2. Puesto
     if (puestosFiltro.length > 0 && !puestosFiltro.some(p => c.puestos.includes(p))) return false;
 
-    // 3. Si no hay ayuntamiento, no filtrar por ubicación
+    // 3. Si no hay ayuntamiento, pasar
     if (!ayuntamientoFiltro) return true;
 
     // 4. Distancia real
     const d = getDistancia(ayuntamientoFiltro, c.ayuntamiento);
     if (d === Infinity) return false;
 
-    // 5. Si la búsqueda es "Local", mostrar todos los del mismo ayuntamiento
+    // 5. Si el candidato puso "Sin límite", siempre pasa
+    if (c.distancia === "Sin límite") return true;
+
+    // 6. Si la búsqueda es "Local", aparecen:
+    //    - Los del mismo ayuntamiento (d === 0)
+    //    - Y los que llegan por distancia (d <= radio del candidato)
     if (distanciaFiltro === "Local") {
-      return d === 0;
+      return d === 0 || d <= parseKm(c.distancia);
     }
 
-    // 6. Para otras distancias, usar los radios
-    const parseKm = (dist) => {
-      if (dist === "Sin límite") return Infinity;
-      if (dist === "10 km") return 10;
-      if (dist === "20 km") return 20;
-      if (dist === "30 km") return 30;
-      if (dist === "50 km") return 50;
-      return Infinity;
-    };
-
+    // 7. Para otras distancias, usar ambos radios
     const kmCandidato = parseKm(c.distancia);
     const kmBusqueda = parseKm(distanciaFiltro);
-
     return d <= kmCandidato && d <= kmBusqueda;
   });
 
