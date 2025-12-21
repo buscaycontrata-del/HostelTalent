@@ -85,7 +85,7 @@ document.getElementById("formEmpresa").addEventListener("submit", function(e) {
 });
 
 // ===============
-// LOGIN EMPRESA (AHORA CON EMAIL)
+// LOGIN EMPRESA (por EMAIL)
 // ===============
 document.getElementById("loginEmpresa").addEventListener("submit", function(e) {
   e.preventDefault();
@@ -104,7 +104,7 @@ document.getElementById("loginEmpresa").addEventListener("submit", function(e) {
     document.getElementById("busquedaCandidatos").style.display = "block";
     alert("🔓 Acceso concedido.");
   } else {
-    alert("❌ Empresa no registrada. Usa el email registrado.");
+    alert("❌ Empresa no registrada. Usa el email que registraste.");
   }
 });
 
